@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:layout_margin="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="278dp"
+            android:layout_height="147dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            app:srcCompat="@drawable/help" />
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/welcome"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/howToPlay1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/howToPlay1"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/howToPlay2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/howToPlay2"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints"
+             />
+
+        <TextView
+        android:id="@+id/howToPlay3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/howToPlay3"
+            android:layout_margin="10dp"
+        tools:ignore="MissingConstraints"
+         />
+
+    <TextView
+        android:id="@+id/howToPlay4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/howToPlay4"
+        android:layout_margin="10dp"
+        tools:ignore="MissingConstraints"
+         />
+
+
+
+
+        <Button
+        android:id="@+id/buttonBackToGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="@string/backToGame" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
