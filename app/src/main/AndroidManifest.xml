@@ -29,6 +29,11 @@
             android:label="Configuración"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ActivityGame"
+            android:label="Juego"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

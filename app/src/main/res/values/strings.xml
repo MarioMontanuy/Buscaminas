@@ -15,10 +15,10 @@
     <string name="minas">Porcentaje de minas</string>
     <string name="start">Empezar</string>
     <string name="apply">Aplicar</string>
-    <string name="difficulty1">15%</string>
-    <string name="difficulty2">20%</string>
-    <string name="difficulty3">30%</string>
-    <string name="difficulty4">35%</string>
+    <string name="difficulty1">15</string>
+    <string name="difficulty2">20</string>
+    <string name="difficulty3">25</string>
+    <string name="difficulty4">30</string>
     <string name="gridSize1">5</string>
     <string name="gridSize2">6</string>
     <string name="gridSize3">7</string>

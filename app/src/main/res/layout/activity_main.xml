@@ -9,45 +9,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#00000000"
         android:gravity="top"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="39dp"
         tools:layout_editor_absoluteY="32dp">
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="330dp"
             android:layout_height="195dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/logo"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="100dp"
+            app:srcCompat="@drawable/logo"
             tools:ignore="MissingConstraints" />
+
         <Button
             android:id="@+id/buttonHelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Help"
             android:layout_gravity="center"
-            />
+            android:text="@string/Help" />
 
         <Button
             android:id="@+id/buttonStartGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/StartGame"
             android:layout_gravity="center"
-            />
+            android:text="@string/StartGame" />
 
         <Button
             android:id="@+id/buttonLeave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Leave"
             android:layout_gravity="center"
-            />
-
-
-
-
+            android:text="@string/Leave" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
