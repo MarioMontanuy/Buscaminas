@@ -34,6 +34,16 @@
             android:label="Juego"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".PopUpFinishGame"
+            android:theme="@style/Theme.PopUp"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ActivityResult"
+            android:label="Resultados de la partida"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

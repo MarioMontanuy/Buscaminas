@@ -32,6 +32,8 @@ class GridAdapter(
             val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.grid_item, viewGroup, false)
+            val image = convertView.findViewById<ImageView>(R.id.imageView2)
+            image.setImageResource(R.drawable.capa_parrilla)
         }else{
             val item = getItem(index)
             println("ITEM --> $item")
@@ -44,7 +46,7 @@ class GridAdapter(
     private fun changeImage(item: Int, image: ImageView){
         when(item){
             -1 -> image.setImageResource(R.drawable.bomb)
-            //0 -> image.setImageResource(R.drawable.number0)
+            0 -> image.setImageResource(R.drawable.number0)
             1 -> image.setImageResource(R.drawable.number1)
             2 -> image.setImageResource(R.drawable.number2)
             3 -> image.setImageResource(R.drawable.number3)
