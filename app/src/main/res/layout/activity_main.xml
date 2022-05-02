@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -13,17 +14,8 @@
         android:gravity="top"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="32dp">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="330dp"
-            android:layout_height="195dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="100dp"
-            app:srcCompat="@drawable/logo"
-            tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="32dp"
+        android:layout_marginTop="500dp">
 
         <Button
             android:id="@+id/buttonHelp"

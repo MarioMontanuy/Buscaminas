@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00232120"
+    android:background="#232120"
     tools:context=".MainActivity"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="0dp">
@@ -28,7 +28,7 @@
         android:background="#00FFFFFF"
         android:gravity="center_vertical"
         android:text="@string/alias"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.321"
@@ -44,6 +44,8 @@
         android:layout_margin="10dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:shadowColor="@color/white"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -92,7 +94,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:text="@string/gridSize"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.33"
@@ -117,29 +119,25 @@
             android:id="@+id/radioButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gridSize1" />
+            android:text="@string/gridSize1"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButton6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gridSize2" />
+            android:text="@string/gridSize2"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButton7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gridSize3"
+            android:textColor="@color/white"
             tools:layout_editor_absoluteX="33dp"
             tools:layout_editor_absoluteY="350dp" />
 
-        <RadioButton
-            android:id="@+id/radioButton8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gridSize4"
-            tools:layout_editor_absoluteX="33dp"
-            tools:layout_editor_absoluteY="350dp" />
     </RadioGroup>
 
     <RadioGroup
@@ -158,27 +156,22 @@
             android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/difficulty1" />
+            android:text="@string/difficulty1"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/difficulty2" />
+            android:text="@string/difficulty2"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/difficulty3"
-            tools:layout_editor_absoluteX="33dp"
-            tools:layout_editor_absoluteY="350dp" />
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/difficulty4"
+            android:textColor="@color/white"
             tools:layout_editor_absoluteX="33dp"
             tools:layout_editor_absoluteY="350dp" />
     </RadioGroup>
@@ -189,7 +182,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:text="@string/time"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.321"
@@ -204,7 +197,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:text="@string/minas"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.321"
@@ -218,6 +211,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="@string/apply"
+        android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.029"

@@ -1,6 +1,5 @@
 package com.example.buscaminas
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import android.widget.ImageView
 class GridAdapter(
     private val context: Context,
     private val arrayList: ArrayList<Int>,
+    private var bandera: Boolean = false
 ) :
     BaseAdapter() {
     override fun getCount(): Int {
@@ -18,7 +18,10 @@ class GridAdapter(
     }
 
     override fun getItem(position: Int): Int {
-        return arrayList[position]
+        if(bandera){
+            return 1
+        }
+        return 0
     }
 
     override fun getItemId(position: Int): Long {
@@ -35,26 +38,39 @@ class GridAdapter(
             val image = convertView.findViewById<ImageView>(R.id.imageView2)
             image.setImageResource(R.drawable.capa_parrilla)
         }else{
-            val item = getItem(index)
-            println("ITEM --> $item")
-
             val image = convertView.findViewById<ImageView>(R.id.imageView2)
-            changeImage(item, image)
+            if (index in 0 until count){
+                val item = getItem(index)
+                println("ITEM --> $item")
+
+
+                changeImage(item, image)
+            }else{
+                bandera = if(!bandera){
+                    image.setImageResource(R.drawable.bandera)
+                    true
+                }else{
+                    image.setImageResource(R.drawable.capa_parrilla)
+                    false
+                }
+
+            }
+
         }
         return convertView
     }
     private fun changeImage(item: Int, image: ImageView){
         when(item){
-            -1 -> image.setImageResource(R.drawable.bomb)
+            -1 -> image.setImageResource(R.drawable.mina)
             0 -> image.setImageResource(R.drawable.number0)
             1 -> image.setImageResource(R.drawable.number1)
             2 -> image.setImageResource(R.drawable.number2)
             3 -> image.setImageResource(R.drawable.number3)
-            /*4 -> image.setImageResource(R.drawable.number4)
+            4 -> image.setImageResource(R.drawable.number4)
             5 -> image.setImageResource(R.drawable.number5)
             6 -> image.setImageResource(R.drawable.number6)
             7 -> image.setImageResource(R.drawable.number7)
-            8 -> image.setImageResource(R.drawable.number8)*/
+            8 -> image.setImageResource(R.drawable.number8)
         }
     }
 }

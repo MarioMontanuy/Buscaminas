@@ -29,7 +29,7 @@ class ActivityConfig: AppCompatActivity(){
         if (gridSize == null || bombPercentage == null){
             return
         }
-        Toast.makeText(this, "Todo Ok", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "Todo Ok", Toast.LENGTH_LONG).show()
         val intent = Intent(this, ActivityGame::class.java)
         val bundle = Bundle()
         bundle.putString("playerName", playerName.toString())

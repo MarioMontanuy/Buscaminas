@@ -6,7 +6,7 @@
     <string name="welcome">Bienvenido al juego del BUSCAMINAS!</string>
     <string name="howToPlay1">El juego consiste en despejar todas las casillas de una parrilla que no oculten una mina.</string>
     <string name="howToPlay2">Algunas casillas tienen un número, este número indica las minas que suman todas las casillas circundantes. Así, si una casilla tiene el numero 3, significa que de las ocho casillas que hay alrededor (si no es en una esquina o al borde) hay 3 con minas y 5 sin minas.</string>
-    <string name="howToPlay3">Si se descubre una casilla con un mina SE PIERDE la partida. En otro caso, descubres todas las casillas sin mina GANAS !!</string>
+    <string name="howToPlay3">Si se descubre una casilla con una mina SE PIERDE la partida. En otro caso, descubres todas las casillas sin mina GANAS !!</string>
     <string name="howToPlay4">Puedes configurar el número de filas de una parrilla, el porcentaje de minas en la misma y si quieres que haya un tiempo máximo para completar el juego</string>
     <string name="backToGame">Ir al juego</string>
     <string name="alias">Alias identificativo</string>
@@ -16,12 +16,10 @@
     <string name="start">Empezar</string>
     <string name="apply">Aplicar</string>
     <string name="difficulty1">15</string>
-    <string name="difficulty2">20</string>
-    <string name="difficulty3">25</string>
-    <string name="difficulty4">30</string>
+    <string name="difficulty2">25</string>
+    <string name="difficulty3">35</string>
     <string name="gridSize1">5</string>
     <string name="gridSize2">6</string>
     <string name="gridSize3">7</string>
-    <string name="gridSize4">8</string>
     <string name="email">ejemplo@ejemplo.es</string>
 </resources>

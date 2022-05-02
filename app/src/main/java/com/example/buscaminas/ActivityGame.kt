@@ -1,24 +1,29 @@
 package com.example.buscaminas
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buscaminas.databinding.ActivityGameBinding
 import kotlin.math.roundToInt
 
 
-class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener {
+class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
+    AdapterView.OnItemLongClickListener {
     private lateinit var binding: ActivityGameBinding
 
     private var playerName = ""
     private var gridSize = 5
     private var numBombs= 0
     private var squaresShowed = mutableSetOf<Long>()
-
+    private var resultData = ""
+    private var bandera = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -37,25 +42,30 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener {
         println("RESULTADO: ${(bombPercentage/100)}")
         numBombs = (gridSize * gridSize * (bombPercentage / 100)).roundToInt()
         println("BOMBAS*** $numBombs")
-        binding.textviewPlayerName.text = "Jugador: $playerName"
+        binding.textviewPlayerName.text = "Jugador: $playerName\t\tBombas: $numBombs"
         binding.gridview.numColumns = gridSize
         binding.gridview.scaleY = 0.9F
         val gridItems = getStartingGrid()
         val gridAdapter = GridAdapter(this, gridItems)
         binding.gridview.adapter = gridAdapter
         binding.gridview.onItemClickListener = this
+        binding.gridview.onItemLongClickListener = this
     }
 
     private fun checkControlTime(controlTime: String){
         println("Control time")
         if (controlTime == "true"){
             println("TRUEE")
+
             object : CountDownTimer(180000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     binding.textViewCountDown.text="Tiempo restante: ${millisUntilFinished/1000} segundos"
                 }
                 override fun onFinish() {
-                    gameFinished("Resultado de la partida: Derrota. \n ¡Te has quedado sin tiempo!\"")
+                    println("FINISHH")
+                    resultData = "Resultado de la partida: Derrota.\n ¡Te has quedado sin tiempo!"
+                    showPopUp()
+                    cancel()
                 }
             }.start()
         }else{
@@ -100,53 +110,71 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener {
         }
         return grid
     }
+
     override fun onItemClick(grid: AdapterView<*>, view: View, position: Int, id: Long) {
-        Toast.makeText(this, "CLICK", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "CLICK", Toast.LENGTH_SHORT).show()
+        // TODO sombrear las casillas para no poner el margen del grid y que se vea de por si
+        // TODO cambiar la forma de comprobar la bandera
         println("GRID ITEM -> "+grid.getItemAtPosition(position))
         println("GRID --> $grid")
         println("VIEW --> $view")
         println("ID --> $id")
-        squaresShowed.add(id)
         println("NUMERO DE CASILLAS ${squaresShowed.count()}")
         println("RESTO  ${(gridSize*gridSize)-numBombs}")
-        // TODO sombrear las casillas para no poner el margen del grid y que se vea de por si
-        // Update square in position=index
-        grid.adapter.getView(position, view, grid)
-        if (grid.getItemAtPosition(position) == -1){
-            val square: Pair<Int, Int> = Pair(position/gridSize, position%gridSize)
-            gameFinished("Resultado de la partida: Derrota. \n Bomba activada en la posición $square")
-            finish()
-            //mostrar pop up
+        println("BANDERA: ${grid.adapter.getItem(position)}")
+        if(grid.adapter.getItem(position) == 0){
+            grid.adapter.getView(position, view, grid)
+            squaresShowed.add(id)
+            println("BANDERA = 0")
+            if (grid.getItemAtPosition(position) == -1){
+                val square = Pair(position/gridSize, position%gridSize)
+                //mostrar pop up
                 // opción con una nueva activity
-            /*val intent = Intent(this, PopUpFinishGame::class.java)
-            startActivity(intent)*/
-
+                resultData = "Resultado de la partida: Derrota. \nBomba activada en la posición $square"
+                showPopUp()
                 // mostrar alertDialog
-            /*val alert = AlertDialog.Builder(this)
-            .setCancelable(false)
-            val popUpView = layoutInflater.inflate(R.layout.popup_finishgame, null)
-            val acceptButton = popUpView.findViewById<Button>(R.id.acceptButton)
-            val textBomb = popUpView.findViewById<TextView>(R.id.textBomb)
-            val textSquaresLeft = popUpView.findViewById<TextView>(R.id.textSquaresLeft)
-            textBomb.text = "Vaaya! Parece que te has topado con una bomba en la posición $square"
-            textSquaresLeft.text = "Han quedado $squaresLeft casillas sin descubrir"
-            alert.setView(popUpView)
-            val alertView = alert.create()
-            alertView.show()
-            acceptButton.setOnClickListener{
-                finish()
-            }*/
-            println("Final")
-            //paso a pantalla final
-            //final
-        }
+                /*val alert = AlertDialog.Builder(this)
+                .setCancelable(false)
+                val popUpView = layoutInflater.inflate(R.layout.popup_finishgame, null)
+                val acceptButton = popUpView.findViewById<Button>(R.id.acceptButton)
+                val textBomb = popUpView.findViewById<TextView>(R.id.textBomb)
+                val textSquaresLeft = popUpView.findViewById<TextView>(R.id.textSquaresLeft)
+                textBomb.text = "Vaaya! Parece que te has topado con una bomba en la posición $square"
+                textSquaresLeft.text = "Casillas por descubrir: ${(gridSize*gridSize)-squaresShowed.count()}"
+                alert.setView(popUpView)
+                val alertView = alert.create()
+                alertView.show()
+                acceptButton.setOnClickListener{
+                    gameFinished("Resultado de la partida: Derrota. \n Bomba activada en la posición $square")
+                    //finish()
+                }*/
+                println("Final")
 
-        if (squaresShowed.count() >= (gridSize*gridSize)-numBombs){
-            gameFinished("Resultado de la partida: Victoria. \n ¡Enhorabuena! Has conseguido evitar todas las bombas")
-            finish()
+
+                //paso a pantalla final
+                //final
+            }else if (squaresShowed.count() >= (gridSize*gridSize)-numBombs){
+                resultData = "Resultado de la partida: Victoria. \n¡Enhorabuena! Has conseguido evitar todas las bombas"
+                showPopUp()
+            }
         }
     }
 
+    private fun showPopUp(){
+        val intent = Intent(this, PopUpFinishGame::class.java)
+        println("result DATA $resultData")
+        var bundle = Bundle()
+        bundle.putString("data", resultData)
+        intent.putExtras(bundle)
+        resultLauncher.launch(intent)
+    }
+
+    private var resultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            gameFinished(resultData)
+            finish()
+        }
+    }
     private fun gameFinished(result: String){
         val intent = Intent(this, ActivityResult::class.java)
         val bundle = Bundle()
@@ -154,5 +182,12 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener {
         bundle.putString("result", result)
         intent.putExtras(bundle)
         startActivity(intent)
+    }
+
+    override fun onItemLongClick(grid: AdapterView<*>, view: View, position: Int, id: Long): Boolean {
+        // Toast.makeText(this, "LONG CLICK", Toast.LENGTH_SHORT).show()
+        // TODO evitar que se pueda dar click en una casilla si está la bandera puesta (ahora esta con el getItem, funciona pero no es muy correcto)
+        grid.adapter.getView(position+gridSize*gridSize, view, grid)
+        return true
     }
 }
