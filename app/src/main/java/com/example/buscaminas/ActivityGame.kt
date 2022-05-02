@@ -46,6 +46,7 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         binding.gridview.numColumns = gridSize
         binding.gridview.scaleY = 0.9F
         val gridItems = getStartingGrid()
+        println("GRID ITEMS: $gridItems")
         val gridAdapter = GridAdapter(this, gridItems)
         binding.gridview.adapter = gridAdapter
         binding.gridview.onItemClickListener = this
@@ -65,13 +66,13 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
                     println("FINISHH")
                     resultData = "Resultado de la partida: Derrota.\n ¡Te has quedado sin tiempo!"
                     showPopUp()
-                    cancel()
                 }
             }.start()
         }else{
             binding.textViewCountDown.visibility = View.GONE
         }
     }
+
     private fun getStartingGrid(): ArrayList<Int> {
         var grid = ArrayList<Int>()
         for (i in 0 until gridSize*gridSize) {
@@ -122,48 +123,48 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         println("NUMERO DE CASILLAS ${squaresShowed.count()}")
         println("RESTO  ${(gridSize*gridSize)-numBombs}")
         println("BANDERA: ${grid.adapter.getItem(position)}")
-        if(grid.adapter.getItem(position) == 0){
-            grid.adapter.getView(position, view, grid)
-            squaresShowed.add(id)
-            println("BANDERA = 0")
-            if (grid.getItemAtPosition(position) == -1){
-                val square = Pair(position/gridSize, position%gridSize)
-                //mostrar pop up
-                // opción con una nueva activity
-                resultData = "Resultado de la partida: Derrota. \nBomba activada en la posición $square"
-                showPopUp()
-                // mostrar alertDialog
-                /*val alert = AlertDialog.Builder(this)
-                .setCancelable(false)
-                val popUpView = layoutInflater.inflate(R.layout.popup_finishgame, null)
-                val acceptButton = popUpView.findViewById<Button>(R.id.acceptButton)
-                val textBomb = popUpView.findViewById<TextView>(R.id.textBomb)
-                val textSquaresLeft = popUpView.findViewById<TextView>(R.id.textSquaresLeft)
-                textBomb.text = "Vaaya! Parece que te has topado con una bomba en la posición $square"
-                textSquaresLeft.text = "Casillas por descubrir: ${(gridSize*gridSize)-squaresShowed.count()}"
-                alert.setView(popUpView)
-                val alertView = alert.create()
-                alertView.show()
-                acceptButton.setOnClickListener{
-                    gameFinished("Resultado de la partida: Derrota. \n Bomba activada en la posición $square")
-                    //finish()
-                }*/
-                println("Final")
+        //if(grid.adapter.getItem(position) == 0){
+        grid.adapter.getView(position, view, grid)
+        squaresShowed.add(id)
+        println("BANDERA = 0")
+        if (grid.getItemAtPosition(position) == -1){
+            val square = Pair(position/gridSize, position%gridSize)
+            //mostrar pop up
+            // opción con una nueva activity
+            resultData = "Resultado de la partida: Derrota. \nBomba activada en la posición $square"
+            showPopUp()
+            // mostrar alertDialog
+            /*val alert = AlertDialog.Builder(this)
+            .setCancelable(false)
+            val popUpView = layoutInflater.inflate(R.layout.popup_finishgame, null)
+            val acceptButton = popUpView.findViewById<Button>(R.id.acceptButton)
+            val textBomb = popUpView.findViewById<TextView>(R.id.textBomb)
+            val textSquaresLeft = popUpView.findViewById<TextView>(R.id.textSquaresLeft)
+            textBomb.text = "Vaaya! Parece que te has topado con una bomba en la posición $square"
+            textSquaresLeft.text = "Casillas por descubrir: ${(gridSize*gridSize)-squaresShowed.count()}"
+            alert.setView(popUpView)
+            val alertView = alert.create()
+            alertView.show()
+            acceptButton.setOnClickListener{
+                gameFinished("Resultado de la partida: Derrota. \n Bomba activada en la posición $square")
+                //finish()
+            }*/
+            println("Final")
 
 
-                //paso a pantalla final
-                //final
-            }else if (squaresShowed.count() >= (gridSize*gridSize)-numBombs){
-                resultData = "Resultado de la partida: Victoria. \n¡Enhorabuena! Has conseguido evitar todas las bombas"
-                showPopUp()
-            }
+            //paso a pantalla final
+            //final
+        }else if (squaresShowed.count() >= (gridSize*gridSize)-numBombs){
+            resultData = "Resultado de la partida: Victoria. \n¡Enhorabuena! Has conseguido evitar todas las bombas"
+            showPopUp()
         }
+       // }
     }
 
     private fun showPopUp(){
         val intent = Intent(this, PopUpFinishGame::class.java)
         println("result DATA $resultData")
-        var bundle = Bundle()
+        val bundle = Bundle()
         bundle.putString("data", resultData)
         intent.putExtras(bundle)
         resultLauncher.launch(intent)

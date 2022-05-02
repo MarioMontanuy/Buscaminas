@@ -18,10 +18,7 @@ class GridAdapter(
     }
 
     override fun getItem(position: Int): Int {
-        if(bandera){
-            return 1
-        }
-        return 0
+        return arrayList[position]
     }
 
     override fun getItemId(position: Int): Long {
