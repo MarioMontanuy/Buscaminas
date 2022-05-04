@@ -26,7 +26,7 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
     private var viewModel = GridModel()
     private var milliSeconds: Long = 180000
     private var countDownInterval: Long = 1000
-
+    private var gridAdapter = GridAdapter(this, ArrayList())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -61,7 +61,7 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         binding.textviewPlayerName.text = "Jugador: $playerName\t\tBombas: $numBombs"
         binding.gridview.numColumns = gridSize
         binding.gridview.scaleY = 0.9F
-
+        // TODO establecer un tamaño fijo para el gridview
         println("PORCENTAJE DE BOMBAS: $bombPercentage")
         println("RESULTADO: ${(bombPercentage/100)}")
         println("BOMBAS*** $numBombs")
@@ -74,14 +74,13 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         val observer: Observer<ArrayList<GridItem>> =
             Observer {   // Update the UI, in this case, a TextView.
                 println("MODIFICACION CAPTURADA")
-                val gridAdapter = GridAdapter(this, viewModel.getLiveDataGridItems().value!!)
-                binding.gridview.adapter = gridAdapter
+                gridAdapter.notifyDataSetChanged()
             }
         viewModel.getLiveDataGridItems().observe(this, observer)
     }
 
     private fun setAdapter(){
-        val gridAdapter = GridAdapter(this, viewModel.getLiveDataGridItems().value!!)
+        gridAdapter = GridAdapter(this, viewModel.getLiveDataGridItems().value!!)
         binding.gridview.adapter = gridAdapter
         binding.gridview.onItemClickListener = this
         binding.gridview.onItemLongClickListener = this

@@ -81,6 +81,8 @@ class GridModel: ViewModel() {
             if (!currentItem.flag){
                 println("BANDERA ES FALSE")
                 changeItemView(currentItem.id, position)
+                // TODO si es un 0, destapar las casillas contiguas que no tengan bomba, si existe un 0 en una de esas casillas, hacer lo mismo.
+                //  (Posiblemente se pueda hacer añadiendo un atributo show a gridItem para comprobar si la casilla esta destapada.
                 //propagate(currentItem.id, position)
                 squaresShowed.add(position)
 
