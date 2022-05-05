@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.buscaminas.databinding.ActivityGameBinding
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 
@@ -54,7 +55,7 @@ class ActivityGame() : AppCompatActivity(), AdapterView.OnItemClickListener,
         outState.putLong("countDownInterval", countDownInterval)
         outState.putParcelable("viewModel", viewModel)
         //outState.putBinder("chronometer", timer)
-        // TODO guardar ViewModel
+        // TODO guardar timer
     }
 
     private fun configLayout(){
@@ -64,9 +65,9 @@ class ActivityGame() : AppCompatActivity(), AdapterView.OnItemClickListener,
         val bombPercentage = intent.getDoubleExtra("bombPercentage", 15.0)
         time = intent.getStringExtra("time").toString()
         numBombs = (gridSize * gridSize * (bombPercentage / 100)).roundToInt()
-        binding.textviewPlayerName.text = "Jugador: $playerName\t\tBombas: $numBombs"
+        binding.textviewPlayerName.text = "$playerName"
+        binding.textViewNumBombs?.text = "$numBombs"
         binding.gridview.numColumns = gridSize
-        // TODO establecer un tamaño fijo para el gridview
         println("PORCENTAJE DE BOMBAS: $bombPercentage")
         println("RESULTADO: ${(bombPercentage/100)}")
         println("BOMBAS*** $numBombs")
@@ -104,13 +105,12 @@ class ActivityGame() : AppCompatActivity(), AdapterView.OnItemClickListener,
         println("Control time")
         if (controlTime == "true"){
             println("TRUEE")
-            // TODO asignar un objeto al timer
            timer = object : CountDownTimer(milliSeconds, countDownInterval) {
                 override fun onTick(millisUntilFinished: Long) {
-                    binding.textViewCountDown.text="Tiempo restante: ${millisUntilFinished/countDownInterval} segundos"
+                    binding.textViewCountDown.text="${millisUntilFinished/countDownInterval} segundos"
                 }
                 override fun onFinish() {
-                    println("FINISHH")
+                    viewModel.showBombs()
                     resultData = "Resultado de la partida: Derrota.\n ¡Te has quedado sin tiempo!"
                     showPopUp()
                 }
@@ -118,6 +118,7 @@ class ActivityGame() : AppCompatActivity(), AdapterView.OnItemClickListener,
             }.start()
         }else{
             binding.textViewCountDown.visibility = View.GONE
+            binding.imageViewCountDown?.visibility = View.GONE
         }
     }
 

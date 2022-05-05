@@ -29,13 +29,13 @@ class GridAdapter(
     }
 
     override fun getView(index: Int, view: View?, viewGroup: ViewGroup): View? {
-        println("------------------------------")
+        /*println("------------------------------")
         println("INDEX $index")
         println("VIEWGROUP $viewGroup")
-        println("VIEW $view")
+        println("VIEW $view")*/
         var convertView = view
         if (convertView == null) {
-            println("converView es NULL")
+//            println("converView es NULL")
             val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.grid_item, viewGroup, false)
@@ -45,18 +45,18 @@ class GridAdapter(
         }
         val image = convertView?.findViewById<ImageView>(R.id.imageView2)
         image?.setImageResource(getItem(index).imageId)
-        println("IMAGE ID ${getItem(index).imageId}")
+        /*println("IMAGE ID ${getItem(index).imageId}")
         println("1- VIEWGROUP HEIGHT: ${viewGroup.height}")
-        println("1- VIEW HEIGHT: ${convertView?.height}")
+        println("1- VIEW HEIGHT: ${convertView?.height}")*/
         val viewHeight = viewGroup.height/kotlin.math.sqrt(count.toDouble())
-        println("VIEW HEIGHT RESULT: $viewHeight")
+        //println("VIEW HEIGHT RESULT: $viewHeight")
         val layoutParams = convertView?.layoutParams
         layoutParams?.height = viewHeight.toInt()
-        println("viewHeight to int: ${viewHeight.toInt()}")
-        println("viewHeight seteeada: ${layoutParams?.height}")
+        /*println("viewHeight to int: ${viewHeight.toInt()}")
+        println("viewHeight seteeada: ${layoutParams?.height}")*/
         convertView?.layoutParams = layoutParams
-        println("2- VIEWGROUP HEIGHT: ${viewGroup.height}")
-        println("2- VIEW HEIGHT: ${convertView?.height}")
+        /*println("2- VIEWGROUP HEIGHT: ${viewGroup.height}")
+        println("2- VIEW HEIGHT: ${convertView?.height}")*/
             /*val image = convertView.findViewById<ImageView>(R.id.imageView2)
             val item = getItem(index)
             println("ITEM ID ${item.id}")
@@ -69,7 +69,7 @@ class GridAdapter(
                 println("CONTROLO LA FLAG")
                 checkAndUpdateFlag(index, image)
             }*/
-        println("------------------------------")
+//        println("------------------------------")
         return convertView
     }
 

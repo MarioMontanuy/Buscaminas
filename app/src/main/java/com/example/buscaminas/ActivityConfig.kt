@@ -13,6 +13,8 @@ class ActivityConfig: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityConfigBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.radioButtonPM15?.isChecked = true
+        binding.radioButtonTC5?.isChecked = true
         binding.startButton.setOnClickListener{startGame()}
     }
 
