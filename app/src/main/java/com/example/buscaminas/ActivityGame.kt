@@ -4,7 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.PersistableBundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.View
 import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -15,7 +16,7 @@ import com.example.buscaminas.databinding.ActivityGameBinding
 import kotlin.math.roundToInt
 
 
-class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
+class ActivityGame() : AppCompatActivity(), AdapterView.OnItemClickListener,
     AdapterView.OnItemLongClickListener {
     private lateinit var binding: ActivityGameBinding
     private var playerName = ""
@@ -27,6 +28,8 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
     private var milliSeconds: Long = 180000
     private var countDownInterval: Long = 1000
     private var gridAdapter = GridAdapter(this, ArrayList())
+    var timer: CountDownTimer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -35,11 +38,12 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         if(savedInstanceState != null){
             milliSeconds = savedInstanceState.getLong("milliSeconds")
             countDownInterval = savedInstanceState.getLong("countDownInterval")
-            viewModel
+            viewModel = savedInstanceState.getParcelable("viewModel")!!
         }else{
             createLiveData()
         }
         setAdapter()
+        createObserver()
         checkControlTime(time)
     }
 
@@ -48,6 +52,8 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         println("onSaveInstanceState")
         outState.putLong("milliSeconds", milliSeconds)
         outState.putLong("countDownInterval", countDownInterval)
+        outState.putParcelable("viewModel", viewModel)
+        //outState.putBinder("chronometer", timer)
         // TODO guardar ViewModel
     }
 
@@ -60,7 +66,6 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         numBombs = (gridSize * gridSize * (bombPercentage / 100)).roundToInt()
         binding.textviewPlayerName.text = "Jugador: $playerName\t\tBombas: $numBombs"
         binding.gridview.numColumns = gridSize
-        binding.gridview.scaleY = 0.9F
         // TODO establecer un tamaño fijo para el gridview
         println("PORCENTAJE DE BOMBAS: $bombPercentage")
         println("RESULTADO: ${(bombPercentage/100)}")
@@ -70,7 +75,8 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
     private fun createLiveData(){
         viewModel= ViewModelProvider(this).get(GridModel::class.java)
         viewModel.gridModel(gridSize, numBombs)
-
+    }
+    private fun createObserver(){
         val observer: Observer<ArrayList<GridItem>> =
             Observer {   // Update the UI, in this case, a TextView.
                 println("MODIFICACION CAPTURADA")
@@ -99,15 +105,16 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
         if (controlTime == "true"){
             println("TRUEE")
             // TODO asignar un objeto al timer
-            object : CountDownTimer(milliSeconds, countDownInterval) {
+           timer = object : CountDownTimer(milliSeconds, countDownInterval) {
                 override fun onTick(millisUntilFinished: Long) {
-                    binding.textViewCountDown.text="Tiempo restante: ${milliSeconds/countDownInterval} segundos"
+                    binding.textViewCountDown.text="Tiempo restante: ${millisUntilFinished/countDownInterval} segundos"
                 }
                 override fun onFinish() {
                     println("FINISHH")
                     resultData = "Resultado de la partida: Derrota.\n ¡Te has quedado sin tiempo!"
                     showPopUp()
                 }
+
             }.start()
         }else{
             binding.textViewCountDown.visibility = View.GONE
@@ -198,6 +205,7 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
 
 
     private fun showPopUp(){
+        timer?.cancel()
         val intent = Intent(this, PopUpFinishGame::class.java)
         println("result DATA $resultData")
         val bundle = Bundle()
@@ -212,10 +220,11 @@ class ActivityGame: AppCompatActivity(), AdapterView.OnItemClickListener,
             finish()
         }
     }
+
     private fun gameFinished(result: String){
         val intent = Intent(this, ActivityResult::class.java)
         val bundle = Bundle()
-        bundle.putString("logData", "Alias: $playerName.\nTamaño de la cuadrícula: $gridSize x $gridSize.\nNúmero de minas: $numBombs %\n${binding.textViewCountDown.text}.\nCasillas por descubrir: ${(gridSize*gridSize)-viewModel.squaresShowed.count()}.\n")
+        bundle.putString("logData", "Alias: $playerName.\nTamaño de la cuadrícula: $gridSize x $gridSize.\nNúmero de minas: $numBombs \n${binding.textViewCountDown.text}.\nCasillas por descubrir: ${(gridSize*gridSize)-viewModel.squaresShowed.count()}.\n")
         bundle.putString("result", result)
         intent.putExtras(bundle)
         startActivity(intent)
