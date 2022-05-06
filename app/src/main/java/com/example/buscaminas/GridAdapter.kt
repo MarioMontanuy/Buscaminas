@@ -1,21 +1,18 @@
 package com.example.buscaminas
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
-import java.lang.Math.sqrt
-import kotlin.math.floor
 
 class GridAdapter(
     private val context: Context,
     private val arrayList: ArrayList<GridItem>,
 ) :
     BaseAdapter(){
-    private var counter: Int = 0
+
     override fun getCount(): Int {
         return arrayList.size
     }

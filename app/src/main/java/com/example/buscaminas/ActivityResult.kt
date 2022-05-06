@@ -3,7 +3,6 @@ package com.example.buscaminas
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buscaminas.databinding.ActivityResultBinding
 import java.util.*
@@ -43,8 +42,6 @@ class ActivityResult: AppCompatActivity() {
         intent.putExtra(Intent.EXTRA_SUBJECT,"Buscaminas: Resultados partida")
         intent.putExtra(Intent.EXTRA_TEXT, contenido)
         startActivity(intent)
-        // TODO ocultar boton??
-        //binding.buttonEmail.visibility = View.GONE
     }
     private fun createNewGame(){
         val intent = Intent(this, ActivityConfig::class.java)

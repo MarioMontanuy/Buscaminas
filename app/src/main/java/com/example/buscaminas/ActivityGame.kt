@@ -55,7 +55,7 @@ class ActivityGame() : AppCompatActivity(), AdapterView.OnItemClickListener,
         outState.putLong("countDownInterval", countDownInterval)
         outState.putParcelable("viewModel", viewModel)
         //outState.putBinder("chronometer", timer)
-        // TODO guardar timer
+        // TODO guardar timer crear mi propio timer y hacerlo parcelable
     }
 
     private fun configLayout(){
@@ -225,7 +225,7 @@ class ActivityGame() : AppCompatActivity(), AdapterView.OnItemClickListener,
     private fun gameFinished(result: String){
         val intent = Intent(this, ActivityResult::class.java)
         val bundle = Bundle()
-        bundle.putString("logData", "Alias: $playerName.\nTamaño de la cuadrícula: $gridSize x $gridSize.\nNúmero de minas: $numBombs \n${binding.textViewCountDown.text}.\nCasillas por descubrir: ${(gridSize*gridSize)-viewModel.squaresShowed.count()}.\n")
+        bundle.putString("logData", "Alias: $playerName.\nTamaño de la cuadrícula: $gridSize x $gridSize.\nNúmero de minas: $numBombs \n${binding.textViewCountDown.text}.\nCasillas por descubrir: ${(gridSize*gridSize)-viewModel.countShowedSquares()}.\n")
         bundle.putString("result", result)
         intent.putExtras(bundle)
         startActivity(intent)

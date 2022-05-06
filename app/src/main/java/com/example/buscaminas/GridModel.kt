@@ -12,7 +12,6 @@ class GridModel() : ViewModel(), Parcelable {
     private var gridItems = ArrayList<GridItem>()
     private var gridSize: Int = 0
     private var numBombs: Int = 0
-    var squaresShowed = mutableSetOf<Int>()
 
 
 
@@ -27,6 +26,7 @@ class GridModel() : ViewModel(), Parcelable {
 
     fun getLiveDataGridItems() : LiveData<ArrayList<GridItem>> {
         return liveDataGridItems
+
     }
 
     private fun getStartingGridItemValues(): ArrayList<GridItem> {
@@ -92,7 +92,6 @@ class GridModel() : ViewModel(), Parcelable {
 //            println("BANDERA ES FALSE")
             currentItem.showed = true
             changeItemView(currentItem.id, position)
-            squaresShowed.add(position)
             if(currentItem.id == 0){
                 propagate(currentItem.id, position)
             }
@@ -100,11 +99,21 @@ class GridModel() : ViewModel(), Parcelable {
                 showBombs()
                 val square = Pair(position/gridSize, position%gridSize)
                 return "Resultado de la partida: Derrota. \nBomba activada en la posición $square"
-            }else if (squaresShowed.count() >= (gridSize*gridSize)-numBombs){
+            }else if (countShowedSquares() >= (gridSize*gridSize)-numBombs){
                 return "Resultado de la partida: Victoria. \n¡Enhorabuena! Has conseguido evitar todas las bombas"
             }
         }
         return "Ok"
+    }
+    // TODO check if countShowedSquares works instead of adding each time an item into a set to count it later
+    fun countShowedSquares(): Int{
+        var counter = 0
+        for (item in gridItems){
+            if (item.showed){
+                counter++
+            }
+        }
+        return counter
     }
 
     private fun propagate(currentItemId: Int, position: Int) {
@@ -128,7 +137,6 @@ class GridModel() : ViewModel(), Parcelable {
             val newItem = gridItems[newPosition]
             if (newItem.id >= 0) {
                 changeItemView(newItem.id, newPosition)
-                squaresShowed.add(newPosition)
                 newItem.showed = true
                 if (newItem.id == 0) {
                     onItemClickAction(newPosition, newItem)
@@ -190,7 +198,6 @@ class GridModel() : ViewModel(), Parcelable {
         numBombs = parcel.readInt()
         gridItems = parcel.readArrayList(GridModel::class.java.classLoader) as ArrayList<GridItem>
         liveDataGridItems.value = gridItems
-        squaresShowed = parcel.readArray(MutableSet::class.java.classLoader) as MutableSet<Int>
     }
     // Unused
    /* private fun countSquaresShowed(){
@@ -211,7 +218,6 @@ class GridModel() : ViewModel(), Parcelable {
         parcel.writeInt(gridSize)
         parcel.writeInt(numBombs)
         parcel.writeList(gridItems)
-        parcel.writeArray(arrayOf(squaresShowed))
     }
 
     companion object CREATOR : Parcelable.Creator<GridModel> {
