@@ -13,8 +13,6 @@ class GridModel() : ViewModel(), Parcelable {
     private var gridSize: Int = 0
     private var numBombs: Int = 0
 
-
-
     fun gridModel(gridSize: Int, numBombs: Int){
         this.gridSize = gridSize
         this.numBombs = numBombs
@@ -31,7 +29,6 @@ class GridModel() : ViewModel(), Parcelable {
 
     private fun getStartingGridItemValues(): ArrayList<GridItem> {
         var grid = getStartingData()
-        println("Grid: $grid")
         // TODO numeros al azar
         val numbersRange = 0 until gridSize*gridSize
         var i = 0
@@ -70,6 +67,7 @@ class GridModel() : ViewModel(), Parcelable {
         }
         return grid
     }
+
     fun doAction(position: Int, click: String): String{
         var result = "Ok"
         /*println("1- NUMERO DE CASILLAS ${squaresShowed.count()}")
@@ -87,9 +85,7 @@ class GridModel() : ViewModel(), Parcelable {
     }
 
     private fun onItemClickAction(position: Int, currentItem: GridItem) : String{
-//        println("ON ITEM CLICK ACTION")
         if (!currentItem.flag){
-//            println("BANDERA ES FALSE")
             currentItem.showed = true
             changeItemView(currentItem.id, position)
             if(currentItem.id == 0){
@@ -98,9 +94,9 @@ class GridModel() : ViewModel(), Parcelable {
             if (currentItem.id == -1){
                 showBombs()
                 val square = Pair(position/gridSize, position%gridSize)
-                return "Resultado de la partida: Derrota. \nBomba activada en la posición $square"
+                return "Resultado de la partida: Derrota\nBomba activada en la posición $square"
             }else if (countShowedSquares() >= (gridSize*gridSize)-numBombs){
-                return "Resultado de la partida: Victoria. \n¡Enhorabuena! Has conseguido evitar todas las bombas"
+                return "Resultado de la partida: Victoria\n¡Enhorabuena! Has conseguido evitar todas las bombas"
             }
         }
         return "Ok"
@@ -118,7 +114,6 @@ class GridModel() : ViewModel(), Parcelable {
 
     private fun propagate(currentItemId: Int, position: Int) {
         if (currentItemId == 0) {
-//            println("ES UN 0")
             for (k in -1 until 2) {
                 updateColumn(position,position + gridSize * k - 1, "left")
                 updateColumn(position,position + gridSize * k, "center")
@@ -128,18 +123,15 @@ class GridModel() : ViewModel(), Parcelable {
     }
 
     private fun updateColumn(position: Int,newPosition: Int, column: String){
-        /*println("---------------------------------")
-        println("**posicion: $position")
-        println("**newPosition: $newPosition")
-        println("**column: $column")*/
         if (isValidPosition(position, newPosition, column)){
-            //println("--------- VALIDO -----------")
             val newItem = gridItems[newPosition]
             if (newItem.id >= 0) {
-                changeItemView(newItem.id, newPosition)
-                newItem.showed = true
-                if (newItem.id == 0) {
-                    onItemClickAction(newPosition, newItem)
+                if(!newItem.flag){
+                    changeItemView(newItem.id, newPosition)
+                    newItem.showed = true
+                    if (newItem.id == 0) {
+                        onItemClickAction(newPosition, newItem)
+                    }
                 }
             }
         }
@@ -154,9 +146,9 @@ class GridModel() : ViewModel(), Parcelable {
         for (item in gridItems){
             if (item.id == -1 && !item.showed){
                 if(item.flag){
-                    item.imageId = R.drawable.bomb
+                    item.imageId = R.drawable.mine_flag
                 }else{
-                    item.imageId = R.drawable.logo
+                    item.imageId = R.drawable.mine_classic
                 }
             }
         }
@@ -167,10 +159,10 @@ class GridModel() : ViewModel(), Parcelable {
             if(gridItems[position].showed){
                 changeItemView(gridItems[position].id, position)
             }else{
-                gridItems[position].imageId = R.drawable.capa_parrilla
+                gridItems[position].imageId = R.drawable.grid_layer
             }
         }else{
-            gridItems[position].imageId = R.drawable.bandera
+            gridItems[position].imageId = R.drawable.flag
         }
         gridItems[position].flag = !gridItems[position].flag
     }
@@ -181,8 +173,8 @@ class GridModel() : ViewModel(), Parcelable {
     private fun changeItemView(item: Int, position: Int){
         when(item){
             // TODO aqui va la bomba de fondo rojo
-            -1 -> gridItems[position].imageId = R.drawable.mina
-            0 -> gridItems[position].imageId = R.drawable.number0
+            -1 -> gridItems[position].imageId = R.drawable.mine_red
+            0 -> gridItems[position].imageId = R.drawable.empty_square
             1 -> gridItems[position].imageId = R.drawable.number1
             2 -> gridItems[position].imageId = R.drawable.number2
             3 -> gridItems[position].imageId = R.drawable.number3
@@ -199,16 +191,6 @@ class GridModel() : ViewModel(), Parcelable {
         gridItems = parcel.readArrayList(GridModel::class.java.classLoader) as ArrayList<GridItem>
         liveDataGridItems.value = gridItems
     }
-    // Unused
-   /* private fun countSquaresShowed(){
-        var i = 0
-        for (item in gridItems){
-            if(item.showed){
-                i++
-            }
-        }
-        return i
-    }*/
 
     override fun describeContents(): Int {
         return 0

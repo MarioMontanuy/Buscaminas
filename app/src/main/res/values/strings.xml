@@ -22,4 +22,12 @@
     <string name="gridSize2">6</string>
     <string name="gridSize3">7</string>
     <string name="email">ejemplo@ejemplo.es</string>
+    <string name="ver_mapa">VER MAPA</string>
+    <string name="ver_resultados">Ver resultados</string>
+    <string name="e_mail_destinatario">E-mail destinatario</string>
+    <string name="valores_del_log">Valores del Log</string>
+    <string name="d_a_y_hora">Día y Hora</string>
+    <string name="salir">Salir</string>
+    <string name="nueva_partida">Nueva partida</string>
+    <string name="enviar_e_mail">Enviar e-mail</string>
 </resources>

@@ -13,18 +13,14 @@ class PopUpFinishGame : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.popup_finishgame)
-
         binding = PopupFinishgameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val windowSize = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(windowSize)
         val width = windowSize.widthPixels
         val height = windowSize.heightPixels
-        window.setLayout((width * 0.85).toInt(), (height * 0.5).toInt())
-        setResult(RESULT_OK, intent)
+        window.setLayout((width * 0.85).toInt(), (height * 0.25).toInt())
         binding.dataText.text = intent.getStringExtra("data")
-        println("DATA ${binding.dataText.text}")
         binding.acceptButton.setOnClickListener { finish() }
     }
 }

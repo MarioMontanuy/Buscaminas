@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="#232120">
 
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="253dp"
-        android:layout_height="122dp"
+        android:layout_width="226dp"
+        android:layout_height="101dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,71 +18,85 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.016"
         app:srcCompat="@drawable/help" />
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="332dp"
-        android:layout_height="26dp"
+        android:layout_width="467dp"
+        android:layout_height="20dp"
         android:layout_margin="10dp"
         android:gravity="left"
         android:text="@string/welcome"
         android:textColor="@color/white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="390dp"
-        tools:layout_editor_absoluteY="45dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.095" />
 
     <TextView
         android:id="@+id/howToPlay1"
-        android:layout_width="338dp"
-        android:layout_height="34dp"
+        android:layout_width="466dp"
+        android:layout_height="54dp"
         android:layout_margin="10dp"
         android:text="@string/howToPlay1"
         android:textColor="@color/white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="390dp"
-        tools:layout_editor_absoluteY="71dp" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.992"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.182" />
 
     <TextView
         android:id="@+id/howToPlay2"
-        android:layout_width="712dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_margin="10dp"
         android:text="@string/howToPlay2"
         android:textColor="@color/white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="247dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.683" />
 
     <TextView
         android:id="@+id/howToPlay3"
-        android:layout_width="716dp"
-        android:layout_height="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
         android:layout_margin="10dp"
         android:text="@string/howToPlay3"
         android:textColor="@color/white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="153dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.366" />
 
     <TextView
         android:id="@+id/howToPlay4"
-        android:layout_width="713dp"
+        android:layout_width="match_parent"
         android:layout_height="33dp"
         android:layout_margin="10dp"
         android:text="@string/howToPlay4"
         android:textColor="@color/white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="198dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonBackToGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
+        android:layout_marginStart="8dp"
         android:text="@string/backToGame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.383"

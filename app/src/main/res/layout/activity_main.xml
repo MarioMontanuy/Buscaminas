@@ -4,24 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#232120"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="700dp"
+        android:layout_height="250dp"
+        android:background="@drawable/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.118" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="350dp"
         android:background="#00000000"
         android:gravity="top"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="32dp"
-        android:layout_marginTop="500dp">
+        tools:layout_editor_absoluteY="32dp">
 
         <Button
             android:id="@+id/buttonHelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             android:text="@string/Help" />
 
         <Button
@@ -29,6 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+
             android:text="@string/StartGame" />
 
         <Button
@@ -38,4 +53,6 @@
             android:layout_gravity="center"
             android:text="@string/Leave" />
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,6 @@ class ActivityResult: AppCompatActivity() {
 
     private fun addStartingData(){
         binding.textDayData.text = Date().toString()
-        log += intent.getStringExtra("logData")
         log += intent.getStringExtra("result")
         binding.textLogData.text = log
     }
