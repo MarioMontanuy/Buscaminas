@@ -69,6 +69,7 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
         binding.textviewPlayerName.text = "$playerName"
         binding.textViewNumBombs.text = "$numBombs"
         binding.gridview.numColumns = gridSize
+        milliSeconds = (gridSize*40000).toLong()
         binding.buttonShowResults.setOnClickListener { showResults() }
         println("PORCENTAJE DE BOMBAS: $bombPercentage")
         println("RESULTADO: ${(bombPercentage/100)}")
