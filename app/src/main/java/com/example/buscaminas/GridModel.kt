@@ -5,7 +5,8 @@ import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.util.concurrent.TimeUnit
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GridModel() : ViewModel(), Parcelable {
     private var liveDataGridItems: MutableLiveData<ArrayList<GridItem>> = MutableLiveData()
@@ -30,10 +31,10 @@ class GridModel() : ViewModel(), Parcelable {
     private fun getStartingGridItemValues(): ArrayList<GridItem> {
         var grid = getStartingData()
         // TODO numeros al azar
-        val numbersRange = 0 until gridSize*gridSize
+        val random = Random(System.currentTimeMillis())
         var i = 0
         while(i < numBombs){
-            val bombNumber = numbersRange.random()
+            val bombNumber = random.nextInt(gridSize*gridSize)
             if (grid[bombNumber].id >= 0){
                 grid[bombNumber].id = -1
                 for(k in -1 until 2){

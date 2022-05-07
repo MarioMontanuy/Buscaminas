@@ -22,16 +22,20 @@
 
     <Button
         android:id="@+id/buttonHelp"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/Help"
+        style="?attr/materialButtonOutlinedStyle"
+        android:textColor="@color/design_default_color_secondary"
+        app:cornerRadius="20dp"
+        app:strokeColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+        app:layout_constraintVertical_bias="0.785" />
 
     <Button
         android:id="@+id/buttonStartGame"
@@ -39,25 +43,33 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/StartGame"
+        style="?attr/materialButtonOutlinedStyle"
+        android:textColor="@color/design_default_color_secondary"
+        app:cornerRadius="20dp"
+        app:strokeColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+        app:layout_constraintVertical_bias="0.785" />
 
     <Button
         android:id="@+id/buttonLeave"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/Leave"
+        style="?attr/materialButtonOutlinedStyle"
+        android:textColor="@color/design_default_color_secondary"
+        app:cornerRadius="20dp"
+        app:strokeColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintHorizontal_bias="0.877"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+        app:layout_constraintVertical_bias="0.785" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,26 +31,37 @@
 
         <Button
             android:id="@+id/buttonHelp"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:text="@string/Help" />
+            android:text="@string/Help"
+            style="?attr/materialButtonOutlinedStyle"
+            android:textColor="@color/design_default_color_secondary"
+            app:cornerRadius="20dp"
+            app:strokeColor="@color/design_default_color_secondary" />
 
         <Button
             android:id="@+id/buttonStartGame"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-
+            style="?attr/materialButtonOutlinedStyle"
+            android:textColor="@color/design_default_color_secondary"
+            app:cornerRadius="20dp"
+            app:strokeColor="@color/design_default_color_secondary"
             android:text="@string/StartGame" />
 
         <Button
             android:id="@+id/buttonLeave"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            style="?attr/materialButtonOutlinedStyle"
+            android:textColor="@color/design_default_color_secondary"
+            app:cornerRadius="20dp"
+            app:strokeColor="@color/design_default_color_secondary"
             android:text="@string/Leave" />
     </LinearLayout>
 

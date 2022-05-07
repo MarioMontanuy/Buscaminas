@@ -28,7 +28,7 @@
         android:background="#00FFFFFF"
         android:gravity="center_vertical"
         android:text="@string/alias"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_secondary"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.321"
@@ -44,8 +44,8 @@
         android:layout_margin="10dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:shadowColor="@color/white"
-        android:textColor="@color/white"
+        android:shadowColor="@color/design_default_color_secondary"
+        android:textColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -94,7 +94,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:text="@string/gridSize"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_secondary"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.33"
@@ -120,24 +120,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gridSize1"
-            android:textColor="@color/white" />
+            android:textColor="@color/design_default_color_secondary" />
 
         <RadioButton
             android:id="@+id/radioButtonTC6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gridSize2"
-            android:textColor="@color/white" />
+            android:textColor="@color/design_default_color_secondary" />
 
         <RadioButton
             android:id="@+id/radioButtonTC7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gridSize3"
-            android:textColor="@color/white"
+            android:textColor="@color/design_default_color_secondary"
             tools:layout_editor_absoluteX="33dp"
             tools:layout_editor_absoluteY="350dp" />
-
+        <RadioButton
+            android:id="@+id/radioButtonTC8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gridSize4"
+            android:textColor="@color/design_default_color_secondary"
+            tools:layout_editor_absoluteX="33dp"
+            tools:layout_editor_absoluteY="350dp" />
     </RadioGroup>
 
     <RadioGroup
@@ -157,21 +164,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/difficulty1"
-            android:textColor="@color/white" />
+            android:textColor="@color/design_default_color_secondary" />
+
+        <RadioButton
+            android:id="@+id/radioButtonPM20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/difficulty2"
+            android:textColor="@color/design_default_color_secondary" />
 
         <RadioButton
             android:id="@+id/radioButtonPM25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/difficulty2"
-            android:textColor="@color/white" />
-
+            android:text="@string/difficulty3"
+            android:textColor="@color/design_default_color_secondary"
+            tools:layout_editor_absoluteX="33dp"
+            tools:layout_editor_absoluteY="350dp" />
         <RadioButton
-            android:id="@+id/radioButtonPM35"
+            android:id="@+id/radioButtonPM30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/difficulty3"
-            android:textColor="@color/white"
+            android:text="@string/difficulty4"
+            android:textColor="@color/design_default_color_secondary"
             tools:layout_editor_absoluteX="33dp"
             tools:layout_editor_absoluteY="350dp" />
     </RadioGroup>
@@ -182,7 +197,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:text="@string/time"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_secondary"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.321"
@@ -197,7 +212,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:text="@string/minas"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_secondary"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.321"
@@ -211,7 +226,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="@string/apply"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_secondary"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.029"
@@ -222,9 +237,13 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/start"
+        style="?attr/materialButtonOutlinedStyle"
+        android:textColor="@color/design_default_color_secondary"
+        app:cornerRadius="20dp"
+        app:strokeColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -16,11 +16,13 @@
     <string name="start">Empezar</string>
     <string name="apply">Aplicar</string>
     <string name="difficulty1">15</string>
-    <string name="difficulty2">25</string>
-    <string name="difficulty3">35</string>
+    <string name="difficulty2">20</string>
+    <string name="difficulty3">25</string>
+    <string name="difficulty4">30</string>
     <string name="gridSize1">5</string>
     <string name="gridSize2">6</string>
     <string name="gridSize3">7</string>
+    <string name="gridSize4">8</string>
     <string name="email">ejemplo@ejemplo.es</string>
     <string name="ver_mapa">VER MAPA</string>
     <string name="ver_resultados">Ver resultados</string>
