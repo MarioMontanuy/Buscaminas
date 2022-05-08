@@ -9,19 +9,16 @@ import android.widget.ImageView
 
 class GridAdapter(
     private val context: Context,
-    private val arrayList: ArrayList<Int>,
-    private var bandera: Boolean = false
+    private val arrayList: ArrayList<GridItem>,
 ) :
     BaseAdapter() {
+
     override fun getCount(): Int {
         return arrayList.size
     }
 
-    override fun getItem(position: Int): Int {
-        if(bandera){
-            return 1
-        }
-        return 0
+    override fun getItem(position: Int): GridItem {
+        return arrayList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -30,47 +27,17 @@ class GridAdapter(
 
     override fun getView(index: Int, view: View?, viewGroup: ViewGroup): View? {
         var convertView = view
-        println("GETVIEW")
         if (convertView == null) {
             val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.grid_item, viewGroup, false)
-            val image = convertView.findViewById<ImageView>(R.id.imageView2)
-            image.setImageResource(R.drawable.capa_parrilla)
-        }else{
-            val image = convertView.findViewById<ImageView>(R.id.imageView2)
-            if (index in 0 until count){
-                val item = getItem(index)
-                println("ITEM --> $item")
-
-
-                changeImage(item, image)
-            }else{
-                bandera = if(!bandera){
-                    image.setImageResource(R.drawable.bandera)
-                    true
-                }else{
-                    image.setImageResource(R.drawable.capa_parrilla)
-                    false
-                }
-
-            }
-
         }
+        val image = convertView?.findViewById<ImageView>(R.id.imageView2)
+        image?.setImageResource(getItem(index).imageId)
+        val viewHeight = viewGroup.height / kotlin.math.sqrt(count.toDouble())
+        val layoutParams = convertView?.layoutParams
+        layoutParams?.height = viewHeight.toInt()
+        convertView?.layoutParams = layoutParams
         return convertView
-    }
-    private fun changeImage(item: Int, image: ImageView){
-        when(item){
-            -1 -> image.setImageResource(R.drawable.mina)
-            0 -> image.setImageResource(R.drawable.number0)
-            1 -> image.setImageResource(R.drawable.number1)
-            2 -> image.setImageResource(R.drawable.number2)
-            3 -> image.setImageResource(R.drawable.number3)
-            4 -> image.setImageResource(R.drawable.number4)
-            5 -> image.setImageResource(R.drawable.number5)
-            6 -> image.setImageResource(R.drawable.number6)
-            7 -> image.setImageResource(R.drawable.number7)
-            8 -> image.setImageResource(R.drawable.number8)
-        }
     }
 }

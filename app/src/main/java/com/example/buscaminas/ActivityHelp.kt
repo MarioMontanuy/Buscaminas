@@ -10,9 +10,7 @@ class ActivityHelp : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityHelpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.buttonBackToGame.setOnClickListener{ backToGame() }
-
     }
 
     private fun backToGame(){
