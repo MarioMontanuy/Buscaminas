@@ -13,100 +13,95 @@ class GridModel() : ViewModel(), Parcelable {
     private var gridItems = ArrayList<GridItem>()
     private var gridSize: Int = 0
     private var numBombs: Int = 0
+    private var firstClick: Boolean = true
 
-    fun gridModel(gridSize: Int, numBombs: Int){
+    fun gridModel(gridSize: Int, numBombs: Int) {
         this.gridSize = gridSize
         this.numBombs = numBombs
-        this.gridItems = getStartingGridItemValues()
-        println("GRID ITEMS: $gridItems")
+        this.gridItems = getStartingData()
         liveDataGridItems.value = this.gridItems
-        println("LIVEDATA: ${liveDataGridItems.value}")
     }
 
-    fun getLiveDataGridItems() : LiveData<ArrayList<GridItem>> {
+    fun getLiveDataGridItems(): LiveData<ArrayList<GridItem>> {
         return liveDataGridItems
 
     }
 
-    private fun getStartingGridItemValues(): ArrayList<GridItem> {
-        var grid = getStartingData()
-        // TODO numeros al azar
+    private fun createGridItemValues(position: Int) {
         val random = Random(System.currentTimeMillis())
         var i = 0
-        while(i < numBombs){
-            val bombNumber = random.nextInt(gridSize*gridSize)
-            if (grid[bombNumber].id >= 0){
-                grid[bombNumber].id = -1
-                for(k in -1 until 2){
-                    if (bombNumber % gridSize != 0){
-                        grid = addNumbersInRow(bombNumber+gridSize*k-1, grid, gridSize)
+        while (i < numBombs) {
+            val bombNumber = random.nextInt(gridSize * gridSize)
+            if (gridItems[bombNumber].id >= 0 && position != bombNumber) {
+                gridItems[bombNumber].id = -1
+                for (k in -1 until 2) {
+                    if (bombNumber % gridSize != 0) {
+                        addNumbersInRow(bombNumber + gridSize * k - 1, gridSize)
                     }
-                    grid = addNumbersInRow(bombNumber+gridSize*k, grid, gridSize)
-                    if (bombNumber % gridSize != gridSize-1){
-                        grid = addNumbersInRow(bombNumber+gridSize*k+1, grid, gridSize)
+                    addNumbersInRow(bombNumber + gridSize * k, gridSize)
+                    if (bombNumber % gridSize != gridSize - 1) {
+                        addNumbersInRow(bombNumber + gridSize * k + 1, gridSize)
                     }
                 }
                 i++
             }
         }
-        return grid
     }
 
-    private fun getStartingData() : ArrayList<GridItem>{
+    private fun getStartingData(): ArrayList<GridItem> {
         val grid = ArrayList<GridItem>()
-        for (i in 0 until gridSize*gridSize) {
+        for (i in 0 until gridSize * gridSize) {
             grid.add(GridItem())
         }
         return grid
     }
 
-    private fun addNumbersInRow(currentNumber: Int, grid: ArrayList<GridItem>, gridSize: Int): ArrayList<GridItem> {
-        if (currentNumber in 0 until gridSize*gridSize){
-            if (grid[currentNumber].id >= 0){
-                grid[currentNumber].id++
+    private fun addNumbersInRow(currentNumber: Int, gridSize: Int) {
+        if (currentNumber in 0 until gridSize * gridSize) {
+            if (gridItems[currentNumber].id >= 0) {
+                gridItems[currentNumber].id++
             }
         }
-        return grid
     }
 
-    fun doAction(position: Int, click: String): String{
+    fun doAction(position: Int, click: String): String {
         var result = "Ok"
-        /*println("1- NUMERO DE CASILLAS ${squaresShowed.count()}")
-        println("2- RESTO  ${(gridSize*gridSize)-numBombs}")*/
+        if (firstClick) {
+            createGridItemValues(position)
+            firstClick = false
+        }
         val currentItem = gridItems[position]
-        /*println("3- ITEM ID OBTENIDO: ${currentItem.id}")
-        println("4- ITEM BANDERA OBTENIDO: ${currentItem.flag}")*/
-        if(click == "onItemClick"){
+        if (click == "onItemClick") {
             result = onItemClickAction(position, currentItem)
-        } else if (click == "onItemLongClick"){
+        } else if (click == "onItemLongClick") {
             onItemLongClickAction(position)
         }
         liveDataGridItems.value = gridItems
         return result
     }
 
-    private fun onItemClickAction(position: Int, currentItem: GridItem) : String{
-        if (!currentItem.flag){
+    private fun onItemClickAction(position: Int, currentItem: GridItem): String {
+        if (!currentItem.flag) {
             currentItem.showed = true
             changeItemView(currentItem.id, position)
-            if(currentItem.id == 0){
+            if (currentItem.id == 0) {
                 propagate(currentItem.id, position)
             }
-            if (currentItem.id == -1){
+            if (currentItem.id == -1) {
                 showBombs()
-                val square = Pair(position/gridSize, position%gridSize)
+                val square = Pair(position / gridSize, position % gridSize)
                 return "Resultado de la partida: Derrota\nBomba activada en la posición $square"
-            }else if (countShowedSquares() >= (gridSize*gridSize)-numBombs){
+            } else if (countShowedSquares() >= (gridSize * gridSize) - numBombs) {
                 return "Resultado de la partida: Victoria\n¡Enhorabuena! Has conseguido evitar todas las bombas"
             }
         }
         return "Ok"
     }
-    // TODO check if countShowedSquares works instead of adding each time an item into a set to count it later
-    fun countShowedSquares(): Int{
+
+    fun countShowedSquares(): Int {
         var counter = 0
-        for (item in gridItems){
-            if (item.showed){
+        for (item in gridItems) {
+            if (item.showed) {
                 counter++
             }
         }
@@ -116,18 +111,18 @@ class GridModel() : ViewModel(), Parcelable {
     private fun propagate(currentItemId: Int, position: Int) {
         if (currentItemId == 0) {
             for (k in -1 until 2) {
-                updateColumn(position,position + gridSize * k - 1, "left")
-                updateColumn(position,position + gridSize * k, "center")
-                updateColumn(position,position + gridSize * k + 1, "right")
+                updateColumn(position, position + gridSize * k - 1, "left")
+                updateColumn(position, position + gridSize * k, "center")
+                updateColumn(position, position + gridSize * k + 1, "right")
             }
         }
     }
 
-    private fun updateColumn(position: Int,newPosition: Int, column: String){
-        if (isValidPosition(position, newPosition, column)){
+    private fun updateColumn(position: Int, newPosition: Int, column: String) {
+        if (isValidPosition(position, newPosition, column)) {
             val newItem = gridItems[newPosition]
             if (newItem.id >= 0) {
-                if(!newItem.flag){
+                if (!newItem.flag) {
                     changeItemView(newItem.id, newPosition)
                     newItem.showed = true
                     if (newItem.id == 0) {
@@ -138,42 +133,38 @@ class GridModel() : ViewModel(), Parcelable {
         }
     }
 
-    private fun isValidPosition(position: Int, newPosition: Int, column: String): Boolean{
+    private fun isValidPosition(position: Int, newPosition: Int, column: String): Boolean {
         return ((column != "left" && position % gridSize == 0) || (column != "right" && position % gridSize == gridSize - 1) || column == "center" || position % gridSize in 1 until gridSize - 1) && newPosition in 0 until gridSize * gridSize && !gridItems[newPosition].showed
     }
 
-    fun showBombs(){
-        // TODO si tiene una bandera: fondo verde, si es la bomba que he pulsado, fondo rojo, resto de bombas fondo gris (Falta poner las imagenes bien, la logica esta hecha)
-        for (item in gridItems){
-            if (item.id == -1 && !item.showed){
-                if(item.flag){
+    fun showBombs() {
+        for (item in gridItems) {
+            if (item.id == -1 && !item.showed) {
+                if (item.flag) {
                     item.imageId = R.drawable.mine_flag
-                }else{
+                } else {
                     item.imageId = R.drawable.mine_classic
                 }
             }
         }
     }
 
-    private fun onItemLongClickAction(position: Int){
-        if (gridItems[position].flag){
-            if(gridItems[position].showed){
+    private fun onItemLongClickAction(position: Int) {
+        if (gridItems[position].flag) {
+            if (gridItems[position].showed) {
                 changeItemView(gridItems[position].id, position)
-            }else{
+            } else {
                 gridItems[position].imageId = R.drawable.grid_layer
             }
-        }else{
+        } else {
             gridItems[position].imageId = R.drawable.flag
         }
         gridItems[position].flag = !gridItems[position].flag
     }
 
 
-
-
-    private fun changeItemView(item: Int, position: Int){
-        when(item){
-            // TODO aqui va la bomba de fondo rojo
+    private fun changeItemView(item: Int, position: Int) {
+        when (item) {
             -1 -> gridItems[position].imageId = R.drawable.mine_red
             0 -> gridItems[position].imageId = R.drawable.empty_square
             1 -> gridItems[position].imageId = R.drawable.number1
@@ -186,6 +177,7 @@ class GridModel() : ViewModel(), Parcelable {
             8 -> gridItems[position].imageId = R.drawable.number8
         }
     }
+
     constructor(parcel: Parcel) : this() {
         gridSize = parcel.readInt()
         numBombs = parcel.readInt()

@@ -1,10 +1,10 @@
 package com.example.buscaminas
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.buscaminas.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,21 +14,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonHelp.setOnClickListener{ showHelp() }
-        binding.buttonStartGame.setOnClickListener{ startGame() }
-        binding.buttonLeave.setOnClickListener{ finish() }
-
-
+        binding.buttonHelp.setOnClickListener { showHelp() }
+        binding.buttonStartGame.setOnClickListener { startGame() }
+        binding.buttonLeave.setOnClickListener { finish() }
     }
 
-    private fun showHelp(){
-        Toast.makeText(this, "Help", Toast.LENGTH_LONG).show()
+    private fun showHelp() {
         val intent = Intent(this, ActivityHelp::class.java)
         startActivity(intent)
     }
 
-    private fun startGame(){
-        Toast.makeText(this, "StartGame", Toast.LENGTH_LONG).show()
+    private fun startGame() {
         val intent = Intent(this, ActivityConfig::class.java)
         startActivity(intent)
         finish()

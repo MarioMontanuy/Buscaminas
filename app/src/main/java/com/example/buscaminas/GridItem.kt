@@ -5,5 +5,4 @@ class GridItem {
     var imageId: Int = R.drawable.grid_layer
     var flag: Boolean = false
     var showed: Boolean = false
-
 }

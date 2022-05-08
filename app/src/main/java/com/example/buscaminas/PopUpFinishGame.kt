@@ -2,7 +2,6 @@ package com.example.buscaminas
 
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buscaminas.databinding.PopupFinishgameBinding
 

@@ -102,11 +102,11 @@
         android:layout_height="wrap_content"
         android:textColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="0.321" />
 
     <TextView
         android:id="@+id/textEmailTitle"
@@ -136,7 +136,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.533"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -148,7 +150,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.351"
-        app:srcCompat="@drawable/email" />
+        app:srcCompat="@drawable/email"
+        android:contentDescription="@drawable/email" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -160,7 +163,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.044"
-        app:srcCompat="@drawable/calendar" />
+        app:srcCompat="@drawable/calendar"
+        android:contentDescription="@drawable/calendar"/>
 
     <ImageView
         android:id="@+id/imageView5"
@@ -172,6 +176,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.044"
-        app:srcCompat="@drawable/folder" />
+        app:srcCompat="@drawable/folder"
+        android:contentDescription="@drawable/folder"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

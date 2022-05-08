@@ -1,8 +1,10 @@
 package com.example.buscaminas
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +19,7 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
     private lateinit var binding: ActivityGameBinding
     private var playerName = ""
     private var gridSize = 5
-    private var numBombs= 0
+    private var numBombs = 0
     private var time = ""
     private var resultData = ""
     private var viewModel = GridModel()
@@ -26,25 +28,24 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
     private var gridAdapter = GridAdapter(this, ArrayList())
     private var gameFinished = false
     var timer: CountDownTimer? = null
-    // TODO crear Log y arreglar email, cambiar icono de la aplicacion
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
         configLayout()
-
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             milliSeconds = savedInstanceState.getLong("milliSeconds")
             viewModel = savedInstanceState.getParcelable("viewModel")!!
             gameFinished = savedInstanceState.getBoolean("gameFinished")
             resultData += savedInstanceState.getString("resultData")
-        }else{
+        } else {
             createLiveData()
         }
         setAdapter()
         createObserver()
         checkControlTime(time)
-        if(gameFinished){
+        if (gameFinished) {
             binding.buttonShowResults.visibility = View.VISIBLE
             timer?.cancel()
         }
@@ -52,88 +53,90 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        println("onSaveInstanceState")
         outState.putParcelable("viewModel", viewModel)
         outState.putLong("milliSeconds", milliSeconds)
         outState.putBoolean("gameFinished", gameFinished)
         outState.putString("resultData", resultData)
-        // TODO guardar timer crear mi propio timer y hacerlo parcelable
     }
 
-    private fun configLayout(){
+    private fun configLayout() {
         playerName = intent.getStringExtra("playerName").toString()
         gridSize = intent.getIntExtra("gridSize", 5)
         val bombPercentage = intent.getDoubleExtra("bombPercentage", 15.0)
         time = intent.getStringExtra("time").toString()
         numBombs = (gridSize * gridSize * (bombPercentage / 100)).roundToInt()
-        binding.textviewPlayerName.text = "$playerName"
+        binding.textviewPlayerName.text = playerName
         binding.textViewNumBombs.text = "$numBombs"
         binding.gridview.numColumns = gridSize
-        milliSeconds = (gridSize*40000).toLong()
+        milliSeconds = (gridSize * 40000).toLong()
         binding.buttonShowResults.setOnClickListener { showResults() }
-        println("PORCENTAJE DE BOMBAS: $bombPercentage")
-        println("RESULTADO: ${(bombPercentage/100)}")
-        println("BOMBAS*** $numBombs")
     }
 
-    private fun showResults(){
+    private fun showResults() {
         gameFinished()
         finish()
     }
 
-    private fun createLiveData(){
-        viewModel= ViewModelProvider(this).get(GridModel::class.java)
+    private fun createLiveData() {
+        viewModel = ViewModelProvider(this).get(GridModel::class.java)
         viewModel.gridModel(gridSize, numBombs)
     }
 
-    private fun createObserver(){
+    private fun createObserver() {
         val observer: Observer<ArrayList<GridItem>> =
             Observer {
-                println("MODIFICACION CAPTURADA")
                 gridAdapter.notifyDataSetChanged()
             }
         viewModel.getLiveDataGridItems().observe(this, observer)
     }
 
-    private fun setAdapter(){
+    private fun setAdapter() {
         gridAdapter = GridAdapter(this, viewModel.getLiveDataGridItems().value!!)
         binding.gridview.adapter = gridAdapter
         binding.gridview.onItemClickListener = this
         binding.gridview.onItemLongClickListener = this
     }
 
-    private fun checkControlTime(controlTime: String){
-        if (controlTime == "true"){
-            binding.textViewCountDown.text="${milliSeconds/countDownInterval} segundos"
+    @SuppressLint("SetTextI18n")
+    private fun checkControlTime(controlTime: String) {
+        if (controlTime == "true") {
+            binding.textViewCountDown.text = "${milliSeconds / countDownInterval} segundos"
             timer = object : CountDownTimer(milliSeconds, countDownInterval) {
                 override fun onTick(millisUntilFinished: Long) {
-                    binding.textViewCountDown.text="${millisUntilFinished/countDownInterval} segundos"
+                    binding.textViewCountDown.text =
+                        "${millisUntilFinished / countDownInterval} segundos"
                     milliSeconds = millisUntilFinished
                 }
+
                 override fun onFinish() {
                     viewModel.showBombs()
+                    startSound("gameOverSound")
                     resultData = "Resultado de la partida: Derrota.\n ¡Te has quedado sin tiempo!"
                     showPopUp()
                 }
             }.start()
-        }else{
+        } else {
             binding.textViewCountDown.visibility = View.GONE
             binding.imageViewCountDown.visibility = View.GONE
         }
     }
 
     override fun onItemClick(grid: AdapterView<*>, view: View, position: Int, id: Long) {
-        // TODO sombrear las casillas para no poner el margen del grid y que se vea de por si
-        if(!gameFinished) {
+        if (!gameFinished) {
             val result = viewModel.doAction(position, "onItemClick")
             if (result != "Ok") {
+                if (viewModel.getLiveDataGridItems().value!![position].id == -1) {
+                    startSound("bombSound")
+                } else {
+                    startSound("winnerSound")
+                }
                 resultData = result
                 showPopUp()
             }
         }
     }
 
-    private fun showPopUp(){
+    private fun showPopUp() {
         timer?.cancel()
         gameFinished = true
         binding.buttonShowResults.visibility = View.VISIBLE
@@ -144,38 +147,34 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
         startActivity(intent)
     }
 
-    private fun gameFinished(){
+    private fun gameFinished() {
         val intent = Intent(this, ActivityResult::class.java)
         val bundle = Bundle()
         resultData += "\nAlias: $playerName\nTamaño de la cuadrícula: $gridSize x $gridSize\nNúmero de minas: $numBombs\nCasillas por descubrir: ${(gridSize * gridSize) - viewModel.countShowedSquares() - numBombs}\n"
-        if(binding.textViewCountDown.visibility != View.GONE){
+        if (binding.textViewCountDown.visibility != View.GONE) {
             resultData += "Tiempo restante: ${binding.textViewCountDown.text}\n"
         }
+        Log.i("ActivityGame", resultData)
         bundle.putString("result", resultData)
         intent.putExtras(bundle)
         startActivity(intent)
     }
 
-    override fun onItemLongClick(grid: AdapterView<*>, view: View, position: Int, id: Long): Boolean {
-        if(!gameFinished){
+    override fun onItemLongClick(
+        grid: AdapterView<*>,
+        view: View,
+        position: Int,
+        id: Long
+    ): Boolean {
+        if (!gameFinished) {
             viewModel.doAction(position, "onItemLongClick")
         }
         return true
     }
-}
 
-// mostrar alertDialog
-/*val alert = AlertDialog.Builder(this)
-val popUpView = layoutInflater.inflate(R.layout.popup_finishgame, null)
-val acceptButton = popUpView.findViewById<Button>(R.id.acceptButton)
-val textBomb = popUpView.findViewById<TextView>(R.id.textBomb)
-val textSquaresLeft = popUpView.findViewById<TextView>(R.id.textSquaresLeft)
-textBomb.text = "Vaaya! Parece que te has topado con una bomba en la posición $square"
-textSquaresLeft.text = "Casillas por descubrir: ${(gridSize*gridSize)-squaresShowed.count()}"
-alert.setView(popUpView)
-val alertView = alert.create()
-alertView.show()
-acceptButton.setOnClickListener{
-    gameFinished("Resultado de la partida: Derrota. \n Bomba activada en la posición $square")
-    //finish()
-}*/
+    private fun startSound(sound: String) {
+        val intentService = Intent(this, SoundService::class.java)
+        intentService.putExtra("sound", sound)
+        this.startService(intentService)
+    }
+}
