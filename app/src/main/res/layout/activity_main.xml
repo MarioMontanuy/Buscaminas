@@ -17,53 +17,75 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.118" />
+        app:layout_constraintVertical_bias="0.118"
+        android:contentDescription="@string/app_name" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="350dp"
+        android:layout_width="411dp"
+        android:layout_height="228dp"
         android:background="#00000000"
         android:gravity="top"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="32dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61">
 
         <Button
             android:id="@+id/buttonHelp"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:text="@string/Help"
-            style="?attr/materialButtonOutlinedStyle"
             android:textColor="@color/design_default_color_secondary"
             app:cornerRadius="20dp"
             app:strokeColor="@color/design_default_color_secondary" />
 
         <Button
             android:id="@+id/buttonStartGame"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            style="?attr/materialButtonOutlinedStyle"
+            android:text="@string/StartGame"
             android:textColor="@color/design_default_color_secondary"
             app:cornerRadius="20dp"
-            app:strokeColor="@color/design_default_color_secondary"
-            android:text="@string/StartGame" />
+            app:strokeColor="@color/design_default_color_secondary" />
 
         <Button
-            android:id="@+id/buttonLeave"
+            android:id="@+id/buttonConfiguration"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            style="?attr/materialButtonOutlinedStyle"
+            android:layout_marginBottom="20dp"
+            android:text="@string/configuration"
             android:textColor="@color/design_default_color_secondary"
             app:cornerRadius="20dp"
-            app:strokeColor="@color/design_default_color_secondary"
-            android:text="@string/Leave" />
+            app:strokeColor="@color/design_default_color_secondary" />
+
     </LinearLayout>
 
+    <Button
+        android:id="@+id/buttonLeave"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/Leave"
+        android:textColor="@color/design_default_color_secondary"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913"
+        app:strokeColor="@color/design_default_color_secondary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

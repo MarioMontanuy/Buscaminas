@@ -3,6 +3,7 @@
     <string name="Help">Ayuda</string>
     <string name="StartGame">Empezar Partida</string>
     <string name="Leave">Salir</string>
+    <string name="configuration">Configuración</string>
     <string name="welcome">¡Bienvenido al juego del BUSCAMINAS!</string>
     <string name="howToPlay1">El juego consiste en despejar todas las casillas de una parrilla que no oculten una mina.</string>
     <string name="howToPlay2">Algunas casillas tienen un número, el cual indica las minas que suman todas las casillas circundantes. Así, si una casilla tiene el numero 3, significa que de las ocho casillas que hay alrededor (si no es una esquina o un borde) hay 3 con minas y 5 sin.</string>

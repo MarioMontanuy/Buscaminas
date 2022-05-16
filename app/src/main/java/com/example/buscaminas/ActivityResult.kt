@@ -18,6 +18,7 @@ class ActivityResult : AppCompatActivity() {
         addStartingData()
         binding.buttonEmail.setOnClickListener { sendEmail() }
         binding.buttonNewGame.setOnClickListener { createNewGame() }
+        binding.buttonConfiguration.setOnClickListener { startConfig() }
         binding.buttonLeave.setOnClickListener { finish() }
     }
 
@@ -39,8 +40,13 @@ class ActivityResult : AppCompatActivity() {
     }
 
     private fun createNewGame() {
-        val intent = Intent(this, ActivityConfig::class.java)
+        val intent = Intent(this, ActivityGame::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun startConfig() {
+        val intent = Intent(this, ActivityConfig::class.java)
+        startActivity(intent)
     }
 }

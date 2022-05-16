@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonHelp.setOnClickListener { showHelp() }
         binding.buttonStartGame.setOnClickListener { startGame() }
+        binding.buttonConfiguration.setOnClickListener { startConfig() }
         binding.buttonLeave.setOnClickListener { finish() }
     }
 
@@ -25,8 +26,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startGame() {
-        val intent = Intent(this, ActivityConfig::class.java)
+        val intent = Intent(this, ActivityGame::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun startConfig() {
+        val intent = Intent(this, ActivityConfig::class.java)
+        startActivity(intent)
     }
 }

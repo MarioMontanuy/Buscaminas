@@ -1,6 +1,7 @@
 package com.example.buscaminas
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -60,10 +61,13 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
     }
 
     private fun configLayout() {
-        playerName = intent.getStringExtra("playerName").toString()
-        gridSize = intent.getIntExtra("gridSize", 5)
-        val bombPercentage = intent.getDoubleExtra("bombPercentage", 15.0)
-        time = intent.getStringExtra("time").toString()
+        val preferences = getSharedPreferences("com.example.buscaminas_preferences", Context.MODE_PRIVATE)
+        playerName = preferences.getString("playerName", "Jugador").toString()
+        println("palyerName: $playerName")
+        gridSize = preferences.getString("preferenceGridSize", "5")!!.toInt()
+        val bombPercentage = preferences.getString("preferenceBombPercentage", "15")!!.toDouble()
+        time = preferences.getBoolean("time", false).toString()
+        println("time: $time")
         numBombs = (gridSize * gridSize * (bombPercentage / 100)).roundToInt()
         binding.textviewPlayerName.text = playerName
         binding.textViewNumBombs.text = "$numBombs"

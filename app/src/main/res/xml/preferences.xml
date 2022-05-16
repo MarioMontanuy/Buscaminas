@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="JUEGO" >
+        <ListPreference
+            android:icon="@drawable/grid"
+            android:key="preferenceGridSize"
+            android:title="Tamaño cuadrícula"
+            android:summary="Número de filas y columnas"
+            android:dialogTitle="Indicar tamaño"
+            android:entries="@array/gridSize"
+            android:entryValues="@array/gridSizeValues"/>
+
+        <ListPreference
+            android:icon="@drawable/mine"
+            android:key="preferenceBombPercentage"
+            android:title="Porcentaje de minas"
+            android:summary="Escoge el número de bombas que deseas evitar"
+            android:dialogTitle="Indicar porcentaje de bombas"
+            android:entries="@array/bombPercentage"
+            android:entryValues="@array/bombPercentageValues"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="PERSONALIZAR" >
+        <EditTextPreference
+            android:icon="@drawable/user"
+            android:key="playerName"
+            android:title="Alias identificativo"
+            android:summary="Jugador"
+            android:dialogTitle="Nombre de usuario"
+            />
+        <CheckBoxPreference
+            android:icon="@drawable/time"
+            android:key="time"
+            android:title="Control del tiempo"
+            android:summary="Si está activado la partida tendrá tiempo máximo de juego" />
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>
