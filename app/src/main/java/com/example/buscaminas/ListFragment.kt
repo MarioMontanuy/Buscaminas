@@ -31,7 +31,7 @@ class ListFragment: ListFragment() {
             val intent = Intent(requireActivity(), DetailActivity::class.java)
             startActivity(intent)
         }*/
-
+        // TODO adaptar para un elemento de la base de datos
         rListener?.onResultSelected(listAdapter?.getItem(position) as String)
 
         /*val noteUri : Uri = ContentUris.withAppendedId(,id)
