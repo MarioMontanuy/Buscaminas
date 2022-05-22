@@ -33,4 +33,7 @@
     <string name="salir">Salir</string>
     <string name="nueva_partida">Nueva partida</string>
     <string name="enviar_e_mail">Enviar e-mail</string>
+    <string name="menu_principal">Menú principal</string>
+    <string name="visualizar_lista">Visualizar lista</string>
+    <string name="consultar_partidas">Consultar Partidas</string>
 </resources>

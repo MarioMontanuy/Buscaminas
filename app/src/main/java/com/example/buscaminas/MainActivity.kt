@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding.buttonStartGame.setOnClickListener { startGame() }
         binding.buttonConfiguration.setOnClickListener { startConfig() }
         binding.buttonLeave.setOnClickListener { finish() }
+        binding.buttonCheckGames.setOnClickListener { checkGames() }
     }
 
     private fun showHelp() {
@@ -33,6 +34,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun startConfig() {
         val intent = Intent(this, ActivityConfig::class.java)
+        startActivity(intent)
+    }
+
+    private fun checkGames() {
+        val intent = Intent(this, GamesPlayed::class.java)
         startActivity(intent)
     }
 }
