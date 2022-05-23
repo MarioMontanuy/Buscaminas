@@ -65,7 +65,7 @@ class GridModel() : ViewModel(), Parcelable {
     }
 
     fun doAction(position: Int, click: String): String {
-        var result = "Ok"
+        var result = ""
         if (firstClick) {
             createGridItemValues(position)
             firstClick = false
@@ -80,7 +80,7 @@ class GridModel() : ViewModel(), Parcelable {
         return result
     }
 
-    private fun onItemClickAction(position: Int, currentItem: GridItem): String {
+    private fun onItemClickAction(position: Int, currentItem: GridItem) : String {
         if (!currentItem.flag) {
             currentItem.showed = true
             changeItemView(currentItem.id, position)
@@ -88,14 +88,15 @@ class GridModel() : ViewModel(), Parcelable {
                 propagate(currentItem.id, position)
             }
             if (currentItem.id == -1) {
-                showBombs()
                 val square = Pair(position / gridSize, position % gridSize)
-                return "Resultado de la partida: Derrota\nBomba activada en la posición $square"
+                DataSingleton.gameResult = "Resultado de la partida: Derrota\nBomba activada en la posición $square"
+                return "Bomb"
             } else if (countShowedSquares() >= (gridSize * gridSize) - numBombs) {
-                return "Resultado de la partida: Victoria\n¡Enhorabuena! Has conseguido evitar todas las bombas"
+                DataSingleton.gameResult = "Resultado de la partida: Victoria\n¡Enhorabuena! Has conseguido evitar todas las bombas"
+                return "Win"
             }
         }
-        return "Ok"
+        return ""
     }
 
     fun countShowedSquares(): Int {
@@ -147,6 +148,7 @@ class GridModel() : ViewModel(), Parcelable {
                 }
             }
         }
+        liveDataGridItems.value = gridItems
     }
 
     private fun onItemLongClickAction(position: Int) {

@@ -9,7 +9,6 @@ import java.util.*
 
 class ActivityResult : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
-    private var log = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,17 +22,16 @@ class ActivityResult : AppCompatActivity() {
     }
 
     private fun addStartingData() {
-        binding.textDayData.text = Date().toString()
-        log += intent.getStringExtra("result")
-        binding.textLogData.text = log
+        binding.textDayData.text = DataSingleton.currentTime
+        binding.textLogData.text = DataSingleton.getResult()
     }
 
     private fun sendEmail() {
         val intent = Intent(Intent.ACTION_SENDTO)
         var contenido = ""
-        contenido += binding.textLogData.text
+        contenido += DataSingleton.getResult()
         contenido += "\n"
-        contenido += "Fecha de la partida: " + binding.textDayData.text
+        contenido += "Fecha de la partida: " + DataSingleton.currentTime
         intent.data =
             Uri.parse("mailto:${binding.editTextEmailData.text}?subject=Buscaminas: Resultados partida&body=$contenido")
         startActivity(intent)

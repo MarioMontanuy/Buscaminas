@@ -19,7 +19,7 @@ class PopUpFinishGame : AppCompatActivity() {
         val width = windowSize.widthPixels
         val height = windowSize.heightPixels
         window.setLayout((width * 0.85).toInt(), (height * 0.25).toInt())
-        binding.dataText.text = intent.getStringExtra("data")
+        binding.dataText.text = DataSingleton.gameResult
         binding.acceptButton.setOnClickListener { finish() }
     }
 }
