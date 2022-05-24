@@ -1,4 +1,4 @@
-package com.example.buscaminas
+package com.example.buscaminas.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -6,12 +6,21 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.ListFragment
+/*import com.example.buscaminas.database.ResultDataDatabase
+import com.example.buscaminas.database.ResultDataRepository*/
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 
 class ListFragment: ListFragment() {
 
     var rListener : ResultListener? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val applicationScope = CoroutineScope(SupervisorJob())
+        /*val database = ResultDataDatabase.getDatabase(requireActivity(), applicationScope)
+        val repository = ResultDataRepository(database.resultDataDao())
+        println("A***********************")
+        println(database.resultDataDao().getListDataEntries())*/
         val values = arrayOf("Prueba1", "Prueba2", "Prueba3")
         val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, values)
         listAdapter = adapter

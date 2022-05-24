@@ -6,7 +6,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragList"
-        android:name="com.example.buscaminas.ListFragment"
+        android:name="com.example.buscaminas.fragments.ListFragment"
         android:layout_width="377dp"
         android:layout_height="318dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +18,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragDetail"
-        android:name="com.example.buscaminas.DetailFragment"
+        android:name="com.example.buscaminas.fragments.DetailFragment"
         android:layout_width="353dp"
         android:layout_height="322dp"
         app:layout_constraintBottom_toBottomOf="parent"

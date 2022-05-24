@@ -1,4 +1,4 @@
-package com.example.buscaminas
+package com.example.buscaminas.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

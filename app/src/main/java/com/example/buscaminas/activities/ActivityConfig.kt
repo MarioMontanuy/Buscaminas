@@ -1,8 +1,9 @@
-package com.example.buscaminas
+package com.example.buscaminas.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
+import com.example.buscaminas.R
 
 class ActivityConfig: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

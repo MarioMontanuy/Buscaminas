@@ -1,11 +1,11 @@
-package com.example.buscaminas
+package com.example.buscaminas.activities
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.buscaminas.log.DataSingleton
 import com.example.buscaminas.databinding.ActivityResultBinding
-import java.util.*
 
 class ActivityResult : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding

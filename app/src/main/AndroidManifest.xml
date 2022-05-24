@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Buscaminas">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="Buscaminas"
             android:exported="true">
             <intent-filter>
@@ -19,35 +19,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityHelp"
+            android:name=".activities.ActivityHelp"
             android:exported="true">
         </activity>
         <activity
-            android:name=".ActivityConfig"
+            android:name=".activities.ActivityConfig"
             android:exported="true">
         </activity>
         <activity
-            android:name=".ActivityGame"
+            android:name=".activities.ActivityGame"
             android:exported="true">
         </activity>
         <activity
-            android:name=".PopUpFinishGame"
+            android:name=".extra.PopUpFinishGame"
             android:theme="@style/Theme.PopUp"
             android:exported="true">
         </activity>
         <activity
-            android:name=".ActivityResult"
+            android:name=".activities.ActivityResult"
             android:exported="true">
         </activity>
         <service
-            android:name=".SoundService"
+            android:name=".service.SoundService"
             android:enabled="true"/>
         <activity
-            android:name=".GamesPlayed"
+            android:name=".fragments.GamesPlayed"
             android:exported="true">
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name=".activities.DetailActivity"
             android:exported="true">
         </activity>
     </application>

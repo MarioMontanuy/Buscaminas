@@ -1,4 +1,6 @@
-package com.example.buscaminas
+package com.example.buscaminas.game
+
+import com.example.buscaminas.R
 
 class GridItem {
     var id: Int = 0

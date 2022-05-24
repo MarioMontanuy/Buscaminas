@@ -1,4 +1,4 @@
-package com.example.buscaminas
+package com.example.buscaminas.log
 
 object DataSingleton {
     lateinit var playerName : String

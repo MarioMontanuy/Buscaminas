@@ -1,8 +1,9 @@
-package com.example.buscaminas
+package com.example.buscaminas.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.buscaminas.fragments.GamesPlayed
 import com.example.buscaminas.databinding.ActivityMainBinding
 
 

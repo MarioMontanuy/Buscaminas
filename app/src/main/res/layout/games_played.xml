@@ -6,7 +6,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragList"
-        android:name="com.example.buscaminas.ListFragment"
+        android:name="com.example.buscaminas.fragments.ListFragment"
         android:layout_width="415dp"
         android:layout_height="614dp"
         app:layout_constraintBottom_toBottomOf="parent"

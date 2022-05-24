@@ -1,8 +1,10 @@
-package com.example.buscaminas
+package com.example.buscaminas.extra
 
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
+import com.example.buscaminas.R
+import com.example.buscaminas.log.DataSingleton
 import com.example.buscaminas.databinding.PopupFinishgameBinding
 
 class PopUpFinishGame : AppCompatActivity() {

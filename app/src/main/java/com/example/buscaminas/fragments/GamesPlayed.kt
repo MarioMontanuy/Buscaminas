@@ -1,8 +1,10 @@
-package com.example.buscaminas
+package com.example.buscaminas.fragments
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.buscaminas.R
+import com.example.buscaminas.activities.DetailActivity
 import com.example.buscaminas.databinding.GamesPlayedBinding
 
 
@@ -21,7 +23,6 @@ class GamesPlayed : AppCompatActivity(), ListFragment.ResultListener {
 
     override fun onResultSelected(resultData: String) {
         if (supportFragmentManager.findFragmentById(R.id.fragDetail) != null){
-            println("NO ES NULO")
             val fragment = supportFragmentManager.findFragmentById(R.id.fragDetail) as DetailFragment
             if(fragment.isVisible){
                 fragment.showText(resultData)
@@ -31,7 +32,6 @@ class GamesPlayed : AppCompatActivity(), ListFragment.ResultListener {
                 startActivity(intent)
             }
         }else{
-            println("ES NULO")
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("data", resultData)
             startActivity(intent)
