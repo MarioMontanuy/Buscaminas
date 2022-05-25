@@ -2,9 +2,15 @@ package com.example.buscaminas.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.buscaminas.R
+import com.example.buscaminas.activities.ActivityConfig
 import com.example.buscaminas.activities.DetailActivity
+import com.example.buscaminas.database.ResultDataModelFactory
+import com.example.buscaminas.database.ResultDataViewModel
 import com.example.buscaminas.databinding.GamesPlayedBinding
 
 
@@ -20,6 +26,7 @@ class GamesPlayed : AppCompatActivity(), ListFragment.ResultListener {
         val fragmentListado = supportFragmentManager.findFragmentById(R.id.fragList) as ListFragment
         fragmentListado.setResultListener(this)
     }
+
 
     override fun onResultSelected(resultData: String) {
         if (supportFragmentManager.findFragmentById(R.id.fragDetail) != null){
