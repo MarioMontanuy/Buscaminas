@@ -35,6 +35,7 @@ class ListFragment: ListFragment() {
             val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, results)
             listAdapter = adapter
         }*/
+        // TODO crear un adapter para el recyclerView
         val data = arrayOf("prueba1", "prueba2")
         val adapter = ResultDataAdapter()
         listAdapter = adapter
