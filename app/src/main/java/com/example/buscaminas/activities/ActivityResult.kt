@@ -3,7 +3,11 @@ package com.example.buscaminas.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.buscaminas.database.db.roomexample.WordViewModel
+import com.example.buscaminas.database.db.roomexample.WordViewModelFactory
+import com.example.buscaminas.database.db.roomexample.WordsApplication
 import com.example.buscaminas.log.DataSingleton
 import com.example.buscaminas.databinding.ActivityResultBinding
 

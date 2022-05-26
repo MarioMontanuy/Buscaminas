@@ -1,5 +1,7 @@
 package com.example.buscaminas.log
 
+import com.example.buscaminas.database.db.roomexample.Word
+
 object DataSingleton {
     lateinit var playerName : String
     lateinit var currentTime : String
@@ -18,4 +20,6 @@ object DataSingleton {
         }
         return  result
     }
+
+    var currentGame: Word? = null
 }

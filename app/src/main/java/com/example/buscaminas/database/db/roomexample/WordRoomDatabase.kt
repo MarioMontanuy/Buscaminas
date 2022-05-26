@@ -1,4 +1,4 @@
-package com.example.buscaminas.database
+package com.example.buscaminas.database.db.roomexample
 
 import android.content.Context
 import androidx.room.Database
@@ -8,10 +8,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [ResultDataEntity::class], version = 1, exportSchema = false)
-abstract class ResultDataDatabase : RoomDatabase() {
+@Database(entities = arrayOf(Word::class), version = 1, exportSchema = false)
+abstract class WordRoomDatabase : RoomDatabase() {
 
-    abstract fun resultDataDao(): ResultDataDao
+    abstract fun wordDao(): WordDao
 
     private class WordDatabaseCallback(
         private val scope: CoroutineScope
@@ -21,14 +21,20 @@ abstract class ResultDataDatabase : RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var resultDao = database.resultDataDao()
+                    var wordDao = database.wordDao()
 
-                    resultDao.deleteAll()
+                    // Delete all content here.
+                    wordDao.deleteAll()
 
-                    var result = ResultDataEntity("Mario"
-/*, "CurrentDate", "5x5", "15%", "6", "120", "0", "Victoria"*/
-)
-                    resultDao.insert(result)
+                    // Add sample words.
+                    var word = Word("Hello")
+                    wordDao.insert(word)
+                    word = Word("World!")
+                    wordDao.insert(word)
+
+                    // TODO: Add your own words!
+                    word = Word("Mario")
+                    wordDao.insert(word)
                 }
             }
         }
@@ -36,23 +42,27 @@ abstract class ResultDataDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: ResultDataDatabase? = null
+        private var INSTANCE: WordRoomDatabase? = null
 
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ): ResultDataDatabase {
+        ): WordRoomDatabase {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    ResultDataDatabase::class.java,
+                    WordRoomDatabase::class.java,
                     "word_database"
                 )
                     .addCallback(WordDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
+                // return instance
                 instance
             }
         }
     }
 }
+

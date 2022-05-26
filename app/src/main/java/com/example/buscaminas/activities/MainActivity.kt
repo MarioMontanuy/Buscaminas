@@ -3,7 +3,7 @@ package com.example.buscaminas.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.buscaminas.fragments.GamesPlayed
+import com.example.buscaminas.database.db.roomexample.MainActivitydb
 import com.example.buscaminas.databinding.ActivityMainBinding
 
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkGames() {
-        val intent = Intent(this, GamesPlayed::class.java)
+        val intent = Intent(this, MainActivitydb::class.java)
         startActivity(intent)
     }
 }

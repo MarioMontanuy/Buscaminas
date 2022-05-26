@@ -3,19 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragList"
-        android:name="com.example.buscaminas.fragments.ListFragment"
-        android:layout_width="415dp"
-        android:layout_height="614dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="421dp"
+        android:layout_height="586dp"
+        android:padding="@dimen/big_padding"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.005"
+        tools:listitem="@layout/recyclerview_item" />
     <Button
         android:id="@+id/buttonBackToMainScreen"
         style="?attr/materialButtonOutlinedStyle"

@@ -8,13 +8,10 @@ import android.widget.ListView
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.lifecycleScope
 import com.example.buscaminas.R
-import com.example.buscaminas.database.ResultDataAdapter
-import com.example.buscaminas.database.ResultDataApplication
-import com.example.buscaminas.database.ResultDataEntity
 /*import com.example.buscaminas.database.ResultDataDatabase
 import com.example.buscaminas.database.ResultDataRepository*/
 import kotlinx.coroutines.launch
-
+// TODO unused
 class ListFragment: ListFragment() {
 
     var rListener : ResultListener? = null
@@ -36,9 +33,11 @@ class ListFragment: ListFragment() {
             listAdapter = adapter
         }*/
         // TODO crear un adapter para el recyclerView
-        val data = arrayOf("prueba1", "prueba2")
+        /*val data = arrayOf("prueba1", "prueba2")
+        val adapter = ResultDataAdapter()*/
+        /*val results = arrayOf("prueba1", "prueba2")
         val adapter = ResultDataAdapter()
-        listAdapter = adapter
+        listAdapter = adapter*/
     }
 
 

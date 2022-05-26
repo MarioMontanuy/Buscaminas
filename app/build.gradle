@@ -50,4 +50,14 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.4.2'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
 
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.4.1"
+
+    // Corrutine
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.21"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1-native-mt"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1-native-mt"
+
 }
