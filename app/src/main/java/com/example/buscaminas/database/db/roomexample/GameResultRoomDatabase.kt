@@ -8,10 +8,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(Word::class), version = 1, exportSchema = false)
-abstract class WordRoomDatabase : RoomDatabase() {
+@Database(entities = arrayOf(GameResult::class), version = 1, exportSchema = false)
+abstract class GameResultRoomDatabase : RoomDatabase() {
 
-    abstract fun wordDao(): WordDao
+    abstract fun wordDao(): GameResultDao
 
     private class WordDatabaseCallback(
         private val scope: CoroutineScope
@@ -21,20 +21,14 @@ abstract class WordRoomDatabase : RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var wordDao = database.wordDao()
+                    val wordDao = database.wordDao()
 
                     // Delete all content here.
                     wordDao.deleteAll()
 
-                    // Add sample words.
-                    var word = Word("Hello")
-                    wordDao.insert(word)
-                    word = Word("World!")
-                    wordDao.insert(word)
-
-                    // TODO: Add your own words!
-                    word = Word("Mario")
-                    wordDao.insert(word)
+                    /*// Add sample words.
+                    var word = GameResult("Hello")
+                    wordDao.insert(word)*/
                 }
             }
         }
@@ -42,18 +36,18 @@ abstract class WordRoomDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: WordRoomDatabase? = null
+        private var INSTANCE: GameResultRoomDatabase? = null
 
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ): WordRoomDatabase {
+        ): GameResultRoomDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    WordRoomDatabase::class.java,
+                    GameResultRoomDatabase::class.java,
                     "word_database"
                 )
                     .addCallback(WordDatabaseCallback(scope))

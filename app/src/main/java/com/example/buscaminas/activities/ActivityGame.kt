@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.ContactsContract
 import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +44,11 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
             viewModel = savedInstanceState.getParcelable("viewModel")!!
             gameFinished = savedInstanceState.getBoolean("gameFinished")
             resultData += savedInstanceState.getString("resultData")
+            binding.textViewSquaresLeft.text = DataSingleton.squaresLeft.toString()
         } else {
             createLiveData()
+            DataSingleton.squaresLeft = (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
+            binding.textViewSquaresLeft.text = DataSingleton.squaresLeft.toString()
         }
         setAdapter()
         createObserver()
@@ -67,11 +71,11 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
         val preferences = getSharedPreferences("com.example.buscaminas_preferences", Context.MODE_PRIVATE)
         DataSingleton.playerName = preferences.getString("playerName", "Jugador").toString()
         DataSingleton.gridSize = preferences.getString("preferenceGridSize", "5")!!.toInt()
-        DataSingleton.bombPercentage = preferences.getString("preferenceBombPercentage", "15")!!.toDouble()
+        DataSingleton.minePercentage = preferences.getString("preferenceBombPercentage", "15")!!.toDouble()
         DataSingleton.timeControl = preferences.getBoolean("time", false)
-        DataSingleton.bombNumber = (DataSingleton.gridSize * DataSingleton.gridSize * (DataSingleton.bombPercentage / 100)).roundToInt()
+        DataSingleton.mineNumber = (DataSingleton.gridSize * DataSingleton.gridSize * (DataSingleton.minePercentage / 100)).roundToInt()
         binding.textviewPlayerName.text = DataSingleton.playerName
-        binding.textViewNumBombs.text = DataSingleton.bombNumber.toString()
+        binding.textViewNumBombs.text = DataSingleton.mineNumber.toString()
         binding.gridview.numColumns = DataSingleton.gridSize
         milliSeconds = (DataSingleton.gridSize * 40000).toLong()
         binding.buttonShowResults.setOnClickListener { showResults() }
@@ -115,7 +119,7 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
 
                 override fun onFinish() {
                     startSound("gameOverSound")
-                    DataSingleton.gameResult = "Resultado de la partida: Derrota.\n ¡Te has quedado sin tiempo!"
+                    DataSingleton.gameResult = "Derrota"
                     showPopUp()
                 }
             }.start()
@@ -136,6 +140,8 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
                 showPopUp()
             }
         }
+        DataSingleton.squaresLeft = (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
+        binding.textViewSquaresLeft.text = DataSingleton.squaresLeft.toString()
     }
 
     private fun showPopUp() {
@@ -161,7 +167,7 @@ class ActivityGame : AppCompatActivity(), AdapterView.OnItemClickListener,
         Log.i("ActivityGame", resultData)
         bundle.putString("result", resultData)
         intent.putExtras(bundle)*/
-        DataSingleton.squaresLeft = (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.bombNumber
+        DataSingleton.squaresLeft = (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
         DataSingleton.timeLeft = binding.textViewCountDown.text.toString()
         DataSingleton.currentTime = Date().toString()
         startActivity(intent)

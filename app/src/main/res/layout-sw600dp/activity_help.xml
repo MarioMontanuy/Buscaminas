@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232120">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:gravity="top"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="600dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@drawable/help"
+            android:contentDescription="@string/info" />
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/welcome"
+            android:textColor="@color/design_default_color_secondary"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/howToPlay1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="40sp"
+            android:text="@string/howToPlay1"
+            android:textColor="@color/design_default_color_secondary"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/howToPlay2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="40sp"
+            android:text="@string/howToPlay2"
+            android:textColor="@color/design_default_color_secondary"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/howToPlay3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="40sp"
+            android:text="@string/howToPlay3"
+            android:textColor="@color/design_default_color_secondary"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/howToPlay4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="40sp"
+            android:text="@string/howToPlay4"
+            android:textColor="@color/design_default_color_secondary"
+            tools:ignore="MissingConstraints" />
+
+
+        <Button
+            android:id="@+id/buttonBackToGame"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:text="@string/backToGame"
+            android:textColor="@color/design_default_color_secondary"
+            android:textSize="40sp"
+            app:cornerRadius="20dp"
+            app:strokeColor="@color/design_default_color_secondary" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

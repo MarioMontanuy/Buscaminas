@@ -10,48 +10,49 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.buscaminas.R
 
 
-class WordListAdapter(private val onClickListener:(Word) -> Unit, private val onLongClickItemSelected:(Word) -> Boolean) : ListAdapter<Word, WordListAdapter.WordViewHolder>(WordsComparator()) {
+class GameResultListAdapter(private val onClickListener:(GameResult) -> Unit, private val onLongClickItemSelected:(GameResult) -> Boolean) : ListAdapter<GameResult, GameResultListAdapter.GameResultViewHolder>(GameResultComparator()) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
-        return WordViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameResultViewHolder {
+        return GameResultViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GameResultViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current, onClickListener, onLongClickItemSelected)
     }
 
-    class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class GameResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val wordItemView: TextView = itemView.findViewById(R.id.textView)
 
-        fun bind(word: Word, onClickListener:(Word) -> Unit, onLongClickItemSelected:(Word) -> Boolean) {
-            wordItemView.text = word.playerName
+        fun bind(gameResult: GameResult, onClickListener:(GameResult) -> Unit, onLongClickItemSelected:(GameResult) -> Boolean) {
+            val text = "   ${gameResult.playerName} --- ${gameResult.gameDate}\n   Resultado de la partida: ${gameResult.gameResult}"
+            wordItemView.text = text
             wordItemView.setOnClickListener{
-                onClickListener(word)
+                onClickListener(gameResult)
             }
             wordItemView.setOnLongClickListener(){
-                onLongClickItemSelected(word)
+                onLongClickItemSelected(gameResult)
             }
         }
 
         companion object {
-            fun create(parent: ViewGroup): WordViewHolder {
+            fun create(parent: ViewGroup): GameResultViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_item, parent, false)
-                return WordViewHolder(view)
+                return GameResultViewHolder(view)
             }
         }
 
     }
 
-    class WordsComparator : DiffUtil.ItemCallback<Word>() {
-        override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
+    class GameResultComparator : DiffUtil.ItemCallback<GameResult>() {
+        override fun areItemsTheSame(oldItem: GameResult, newItem: GameResult): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
-            return oldItem.playerName == newItem.playerName
+        override fun areContentsTheSame(oldItem: GameResult, newItem: GameResult): Boolean {
+            return oldItem.gameDate == newItem.gameDate
         }
     }
 

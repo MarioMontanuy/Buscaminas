@@ -5,209 +5,218 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#232120">
+
     <ImageButton
         android:id="@+id/buttonConfiguration"
-        android:layout_width="36dp"
-        android:layout_height="37dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:background="@drawable/config"
+        android:contentDescription="@string/configuration"
         android:text="@string/configuration"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028"
-        android:contentDescription="@string/configuration" />
-    <Button
-        android:id="@+id/buttonEmail"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="@string/enviar_e_mail"
-        android:textColor="@color/design_default_color_secondary"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768"
-        app:strokeColor="@color/design_default_color_secondary" />
-
-    <Button
-        android:id="@+id/buttonNewGame"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nueva_partida"
-        android:textColor="@color/design_default_color_secondary"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768"
-        app:strokeColor="@color/design_default_color_secondary" />
+        app:layout_constraintVertical_bias="0.034" />
 
     <Button
         android:id="@+id/buttonLeave"
         style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="150dp"
+        android:layout_width="550dp"
         android:layout_height="wrap_content"
         android:text="@string/salir"
+        android:textSize="40sp"
         android:textColor="@color/design_default_color_secondary"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.955"
+        app:layout_constraintVertical_bias="0.953"
         app:strokeColor="@color/design_default_color_secondary" />
 
     <Button
         android:id="@+id/buttonCheckGames"
         style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="220dp"
+        android:layout_width="550dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:text="@string/consultar_partidas"
+        android:textSize="40sp"
         android:textColor="@color/design_default_color_secondary"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813"
+        app:layout_constraintVertical_bias="0.864"
+        app:strokeColor="@color/design_default_color_secondary" />
+
+    <Button
+        android:id="@+id/buttonNewGame"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="550dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nueva_partida"
+        android:textColor="@color/design_default_color_secondary"
+        android:textSize="40sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.775"
+        app:strokeColor="@color/design_default_color_secondary" />
+
+    <Button
+        android:id="@+id/buttonEmail"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="550dp"
+        android:layout_height="wrap_content"
+        android:text="@string/enviar_e_mail"
+        android:textSize="40sp"
+        android:textColor="@color/design_default_color_secondary"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698"
         app:strokeColor="@color/design_default_color_secondary" />
 
     <TextView
         android:id="@+id/textDayTitle"
-        android:layout_width="148dp"
-        android:layout_height="50dp"
+        android:layout_width="406dp"
+        android:layout_height="98dp"
+        android:gravity="center"
         android:text="@string/d_a_y_hora"
         android:textColor="@color/design_default_color_secondary"
-        android:textSize="30sp"
-        android:gravity="center"
+        android:textSize="70sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.035" />
 
     <TextView
         android:id="@+id/textDayData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/design_default_color_secondary"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.211" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <TextView
         android:id="@+id/textLogTitle"
-        android:layout_width="211dp"
-        android:layout_height="49dp"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/valores_del_log"
         android:textColor="@color/design_default_color_secondary"
-        android:textSize="30sp"
+        android:textSize="70sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.805"
+        app:layout_constraintHorizontal_bias="0.334"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:contentDescription="@drawable/folder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044"
-        app:srcCompat="@drawable/folder" />
+        app:layout_constraintVertical_bias="0.203" />
 
     <TextView
         android:id="@+id/textLogData"
-        android:layout_width="281dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/design_default_color_secondary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321" />
-
-    <TextView
-        android:id="@+id/textEmailTitle"
-        android:layout_width="251dp"
-        android:layout_height="51dp"
-        android:text="@string/e_mail_destinatario"
-        android:gravity="center"
         android:textColor="@color/design_default_color_secondary"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.355" />
 
     <EditText
         android:id="@+id/editTextEmailData"
-        android:layout_width="318dp"
+        android:layout_width="700dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:textSize="40sp"
         android:inputType="textEmailAddress"
         android:shadowColor="@color/design_default_color_secondary"
         android:textColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533"
+        app:layout_constraintVertical_bias="0.604"
         android:autofillHints=""
         tools:ignore="LabelFor" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <TextView
+        android:id="@+id/textEmailTitle"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/e_mail_destinatario"
+        android:textColor="@color/design_default_color_secondary"
+        android:textSize="70sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528"
         app:srcCompat="@drawable/email"
         android:contentDescription="@drawable/email" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044"
+        app:layout_constraintVertical_bias="0.036"
         app:srcCompat="@drawable/calendar"
         android:contentDescription="@drawable/calendar"/>
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.204"
+        app:srcCompat="@drawable/folder"
+        android:contentDescription="@drawable/folder"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,18 +4,17 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.buscaminas.database.db.roomexample.Word
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface WordDao {
+interface GameResultDao {
 
-    @Query("SELECT * FROM word_table ORDER BY playerName ASC")
-    fun getAlphabetizedWords(): Flow<List<Word>>
+    @Query("SELECT * FROM game_result_table ORDER BY playerName ASC")
+    fun getAlphabetizedWords(): Flow<List<GameResult>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(word: Word)
+    suspend fun insert(gameResult: GameResult)
 
-    @Query("DELETE FROM word_table")
+    @Query("DELETE FROM game_result_table")
     suspend fun deleteAll()
 }

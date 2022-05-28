@@ -3,7 +3,6 @@ package com.example.buscaminas.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.buscaminas.database.db.roomexample.MainActivitydb
 import com.example.buscaminas.databinding.ActivityMainBinding
 
 
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding.buttonStartGame.setOnClickListener { startGame() }
         binding.buttonConfiguration.setOnClickListener { startConfig() }
         binding.buttonLeave.setOnClickListener { finish() }
-        binding.buttonCheckGames.setOnClickListener { checkGames() }
+        binding.buttonCheckGames.setOnClickListener { consultGames() }
     }
 
     private fun showHelp() {
@@ -38,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun checkGames() {
-        val intent = Intent(this, MainActivitydb::class.java)
+    private fun consultGames() {
+        val intent = Intent(this, ConsultGamesActivity::class.java)
         startActivity(intent)
     }
 }

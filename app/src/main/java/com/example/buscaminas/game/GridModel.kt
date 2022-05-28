@@ -47,10 +47,11 @@ class GridModel() : ViewModel(), Parcelable {
             }
             if (game.isBomb(position)) {
                 val square = Pair(position / DataSingleton.gridSize, position % DataSingleton.gridSize)
-                DataSingleton.gameResult = "Resultado de la partida: Derrota\nBomba activada en la posición $square"
+                DataSingleton.gameResult = "Derrota"
+                DataSingleton.mineSquare = "$square"
                 return "Bomb"
-            } else if (game.countShowedSquares() >= (DataSingleton.gridSize * DataSingleton.gridSize) - DataSingleton.bombNumber) {
-                DataSingleton.gameResult = "Resultado de la partida: Victoria\n¡Enhorabuena! Has conseguido evitar todas las bombas"
+            } else if (game.countShowedSquares() >= (DataSingleton.gridSize * DataSingleton.gridSize) - DataSingleton.mineNumber) {
+                DataSingleton.gameResult = "Victoria"
                 return "Win"
             }
         }

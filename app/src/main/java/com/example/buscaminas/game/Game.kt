@@ -23,7 +23,7 @@ class Game {
     fun createGridItemValues(position: Int) {
         val random = Random(System.currentTimeMillis())
         var i = 0
-        while (i < DataSingleton.bombNumber) {
+        while (i < DataSingleton.mineNumber) {
             val bombNumber = random.nextInt(DataSingleton.gridSize * DataSingleton.gridSize)
             if (gridItems[bombNumber].id >= 0 && position != bombNumber) {
                 gridItems[bombNumber].id = -1
@@ -121,7 +121,7 @@ class Game {
     fun countShowedSquares(): Int {
         var counter = 0
         for (item in gridItems) {
-            if (item.showed) {
+            if (item.showed && item.id != -1) {
                 counter++
             }
         }

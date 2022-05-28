@@ -3,11 +3,11 @@ package com.example.buscaminas.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.buscaminas.database.db.roomexample.WordViewModel
-import com.example.buscaminas.database.db.roomexample.WordViewModelFactory
-import com.example.buscaminas.database.db.roomexample.WordsApplication
+import com.example.buscaminas.R
+import com.example.buscaminas.database.db.roomexample.*
 import com.example.buscaminas.log.DataSingleton
 import com.example.buscaminas.databinding.ActivityResultBinding
 
@@ -22,7 +22,10 @@ class ActivityResult : AppCompatActivity() {
         binding.buttonEmail.setOnClickListener { sendEmail() }
         binding.buttonNewGame.setOnClickListener { createNewGame() }
         binding.buttonConfiguration.setOnClickListener { startConfig() }
-        binding.buttonLeave.setOnClickListener { finish() }
+        binding.buttonLeave.setOnClickListener { finishGame()  }
+        val item = findViewById<Button>(R.id.buttonCheckGames)
+        item.setOnClickListener{ consultGames() }
+        addDataToDatabase()
     }
 
     private fun addStartingData() {
@@ -44,11 +47,31 @@ class ActivityResult : AppCompatActivity() {
     private fun createNewGame() {
         val intent = Intent(this, ActivityGame::class.java)
         startActivity(intent)
+        DataSingleton.setDefaultValues()
         finish()
     }
 
     private fun startConfig() {
         val intent = Intent(this, ActivityConfig::class.java)
         startActivity(intent)
+    }
+
+    private fun finishGame(){
+        DataSingleton.setDefaultValues()
+        finish()
+    }
+
+    private fun consultGames(){
+        val intent = Intent(this, ConsultGamesActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun addDataToDatabase(){
+        val word = GameResult(DataSingleton.playerName, DataSingleton.currentTime, DataSingleton.gridSize, DataSingleton.minePercentage, DataSingleton.mineNumber, DataSingleton.timeLeft, DataSingleton.timeControl, DataSingleton.squaresLeft, DataSingleton.mineSquare, DataSingleton.gameResult)
+        gameResultViewModel.insert(word)
+    }
+
+    private val gameResultViewModel: GameResultViewModel by viewModels {
+        GameResultViewModelFactory((application as GameResultApplication).repository)
     }
 }

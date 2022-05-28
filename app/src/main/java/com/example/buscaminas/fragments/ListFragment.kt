@@ -1,81 +1,60 @@
 package com.example.buscaminas.fragments
 
-import android.content.Context
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import androidx.fragment.app.ListFragment
-import androidx.lifecycle.lifecycleScope
+import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.buscaminas.R
-/*import com.example.buscaminas.database.ResultDataDatabase
-import com.example.buscaminas.database.ResultDataRepository*/
-import kotlinx.coroutines.launch
-// TODO unused
-class ListFragment: ListFragment() {
+import com.example.buscaminas.database.db.roomexample.*
+import com.example.buscaminas.log.DataSingleton
 
-    var rListener : ResultListener? = null
+class ListFragment : Fragment() {
 
-    // val database = requireActivity() as ResultDataApplication
+    var recyclerView : RecyclerView? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        /*val applicationScope = CoroutineScope(SupervisorJob())
-        val database = ResultDataDatabase.getDatabase(requireActivity(), applicationScope)
-        val repository = ResultDataRepository(database.resultDataDao())
-        println("A***********************")
-        println(database.resultDataDao().getListDataEntries())*/
-        // val results = ArrayList<ResultDataEntity>()
-        /*lifecycleScope.launch {
-            val results = database.repository.allWords
-            val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, results)
-            listAdapter = adapter
-        }*/
-        // TODO crear un adapter para el recyclerView
-        /*val data = arrayOf("prueba1", "prueba2")
-        val adapter = ResultDataAdapter()*/
-        /*val results = arrayOf("prueba1", "prueba2")
-        val adapter = ResultDataAdapter()
-        listAdapter = adapter*/
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        super.onListItemClick(l, v, position, id)
-        /*if (requireActivity().supportFragmentManager.findFragmentById(R.id.fragDetail) != null){
-            val fragment = requireActivity().supportFragmentManager.findFragmentById(R.id.fragDetail) as DetailFragment
-            if(fragment != null && fragment.isVisible){
-                fragment.showText("Hello!!!!")
-            }else{
-                val intent = Intent(requireActivity(), DetailActivity::class.java)
-                startActivity(intent)
-            }
-        }else{
-            val intent = Intent(requireActivity(), DetailActivity::class.java)
-            startActivity(intent)
-        }*/
-        // TODO adaptar para un elemento de la base de datos
-        rListener?.onResultSelected(listAdapter?.getItem(position) as String)
-
-        /*val noteUri : Uri = ContentUris.withAppendedId(,id)
-        rListener?.onResultSelected(noteUri)*/
-
-    }
-
-    interface ResultListener {
-        fun onResultSelected(resultData: String)
-    }
-
-    fun setResultListener(newResultListener: ResultListener){
-        this.rListener = newResultListener
-    }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        rListener = try {
-            context as ResultListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException("$context must implement ResultListener")
+        val vista = inflater.inflate(R.layout.list_fragment, container, false)
+        recyclerView = vista.findViewById(R.id.recyclerview)
+        val adapter = GameResultListAdapter({gameResult -> onClickItemSelected(gameResult)}, {gameResult -> onLongClickItemSelected(gameResult)})
+        recyclerView?.adapter = adapter
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+        gameResultViewModel.allWords.observe(viewLifecycleOwner, Observer { gameResults ->
+            gameResults?.let { adapter.submitList(it) }
+        })
+        val button = vista.findViewById<Button>(R.id.buttonBackToMainScreen)
+        button?.setOnClickListener{
+            activity?.finish()
         }
+        return vista
+    }
+
+    private fun onClickItemSelected(gameResult: GameResult){
+        DataSingleton.currentGame = gameResult
+        val detailFragment = DetailFragment()
+        val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+        fragmentTransaction?.replace(R.id.fragmentGamesResult, detailFragment)?.commit()
+    }
+
+    private fun onLongClickItemSelected(gameResult: GameResult) : Boolean{
+//        Toast.makeText(this, "Click largo la palabra es: " + gameResult.playerName, Toast.LENGTH_SHORT).show()
+        return true
+    }
+
+    private val gameResultViewModel: GameResultViewModel by viewModels {
+        GameResultViewModelFactory((activity?.applicationContext as GameResultApplication).repository)
     }
 }

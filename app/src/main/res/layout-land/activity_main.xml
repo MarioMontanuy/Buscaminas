@@ -7,7 +7,6 @@
     android:background="#232120"
     tools:context=".activities.MainActivity">
 
-
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="1000dp"
@@ -74,12 +73,11 @@
 
     <ImageButton
         android:id="@+id/buttonConfiguration"
-        android:layout_width="36dp"
-        android:layout_height="37dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:background="@drawable/config"
         android:text="@string/configuration"
-        android:textColor="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintLeft_toLeftOf="parent"
