@@ -1,4 +1,4 @@
- package com.example.buscaminas.database.db.roomexample
+ package com.example.buscaminas.database
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch

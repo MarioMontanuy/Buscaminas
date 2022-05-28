@@ -2,32 +2,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <TextView
-        android:id="@+id/textViewDetailFragment"
-        android:layout_width="887dp"
-        android:layout_height="1302dp"
-        android:layout_margin="30dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/teal_200"
-        android:textSize="20sp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:padding="@dimen/big_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintVertical_bias="0.005"
+        tools:listitem="@layout/recyclerview_item" />
 
-    <Button
-        android:id="@+id/buttonBackToList"
+    <!--<Button
+        android:id="@+id/buttonBackToMainScreen"
         style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="500dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/visualizar_lista"
+        android:text="@string/menu_principal"
         android:textColor="@color/design_default_color_secondary"
-        android:textSize="40sp"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -35,5 +32,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.913"
-        app:strokeColor="@color/design_default_color_secondary" />
+        app:strokeColor="@color/design_default_color_secondary" />-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.buscaminas.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,12 +12,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buscaminas.R
-import com.example.buscaminas.database.db.roomexample.*
+import com.example.buscaminas.activities.DetailActivity
+import com.example.buscaminas.database.*
 import com.example.buscaminas.log.DataSingleton
 
 class ListFragment : Fragment() {
 
-    var recyclerView : RecyclerView? = null
+    private var recyclerView : RecyclerView? = null
+    var button : Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,8 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val vista = inflater.inflate(R.layout.list_fragment, container, false)
+        val vista = inflater.inflate(R.layout.fragment_list, container, false)
+        button = vista.findViewById(R.id.buttonBackToMainScreen)
         recyclerView = vista.findViewById(R.id.recyclerview)
         val adapter = GameResultListAdapter({gameResult -> onClickItemSelected(gameResult)}, {gameResult -> onLongClickItemSelected(gameResult)})
         recyclerView?.adapter = adapter
@@ -35,18 +39,26 @@ class ListFragment : Fragment() {
         gameResultViewModel.allWords.observe(viewLifecycleOwner, Observer { gameResults ->
             gameResults?.let { adapter.submitList(it) }
         })
-        val button = vista.findViewById<Button>(R.id.buttonBackToMainScreen)
+        /*button = vista.findViewById<Button>(R.id.buttonBackToMainScreen)
         button?.setOnClickListener{
             activity?.finish()
-        }
+        }*/
         return vista
     }
 
     private fun onClickItemSelected(gameResult: GameResult){
         DataSingleton.currentGame = gameResult
-        val detailFragment = DetailFragment()
-        val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-        fragmentTransaction?.replace(R.id.fragmentGamesResult, detailFragment)?.commit()
+        val frag = requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentGamesResultDetail)
+        if(frag != null){
+            val detailFragment = DetailFragment()
+            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragmentGamesResultDetail, detailFragment)?.commit()
+        }else{
+            val intent = Intent(context, DetailActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     private fun onLongClickItemSelected(gameResult: GameResult) : Boolean{

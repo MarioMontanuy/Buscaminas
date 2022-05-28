@@ -1,5 +1,5 @@
 
-package com.example.buscaminas.database.db.roomexample
+package com.example.buscaminas.database
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.buscaminas.R
 
 
-class GameResultListAdapter(private val onClickListener:(GameResult) -> Unit, private val onLongClickItemSelected:(GameResult) -> Boolean) : ListAdapter<GameResult, GameResultListAdapter.GameResultViewHolder>(GameResultComparator()) {
+class GameResultListAdapter(private val onClickListener:(GameResult) -> Unit, private val onLongClickItemSelected:(GameResult) -> Boolean) : ListAdapter<GameResult, GameResultListAdapter.GameResultViewHolder>(
+    GameResultComparator()
+) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameResultViewHolder {

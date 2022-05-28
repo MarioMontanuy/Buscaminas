@@ -7,7 +7,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:padding="@dimen/big_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.005"
         tools:listitem="@layout/recyclerview_item" />
-    <Button
+    <!--<Button
         android:id="@+id/buttonBackToMainScreen"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="250dp"
@@ -31,7 +31,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.913"
-        app:strokeColor="@color/design_default_color_secondary" />
+        app:strokeColor="@color/design_default_color_secondary" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

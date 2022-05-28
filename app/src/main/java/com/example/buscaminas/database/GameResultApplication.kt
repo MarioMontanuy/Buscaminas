@@ -1,4 +1,4 @@
-package com.example.buscaminas.database.db.roomexample
+package com.example.buscaminas.database
 
 import android.app.Application
 import kotlinx.coroutines.CoroutineScope

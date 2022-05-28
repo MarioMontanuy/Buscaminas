@@ -1,4 +1,4 @@
-package com.example.buscaminas.database.db.roomexample
+package com.example.buscaminas.database
 
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow

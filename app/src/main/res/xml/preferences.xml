@@ -18,6 +18,12 @@
             android:dialogTitle="Indicar porcentaje de bombas"
             android:entries="@array/bombPercentage"
             android:entryValues="@array/bombPercentageValues"/>
+
+        <CheckBoxPreference
+            android:icon="@drawable/time"
+            android:key="time"
+            android:title="Control del tiempo"
+            android:summary="Si está activado la partida tendrá tiempo máximo de juego" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="PERSONALIZAR" >
@@ -28,11 +34,7 @@
             android:summary="Jugador"
             android:dialogTitle="Nombre de usuario"
             />
-        <CheckBoxPreference
-            android:icon="@drawable/time"
-            android:key="time"
-            android:title="Control del tiempo"
-            android:summary="Si está activado la partida tendrá tiempo máximo de juego" />
+
     </PreferenceCategory>
 
 

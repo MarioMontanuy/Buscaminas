@@ -1,9 +1,8 @@
-package com.example.buscaminas.database.db.roomexample
+package com.example.buscaminas.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.buscaminas.log.DataSingleton
 
 @Entity(tableName = "game_result_table")
 class GameResult

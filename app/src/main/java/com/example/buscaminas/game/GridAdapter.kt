@@ -9,7 +9,7 @@ import android.widget.ImageView
 import com.example.buscaminas.R
 
 class GridAdapter(
-    private val context: Context,
+    private val context: Context?,
     private val arrayList: ArrayList<GridItem>,
 ) :
     BaseAdapter() {
@@ -30,7 +30,7 @@ class GridAdapter(
         var convertView = view
         if (convertView == null) {
             val inflater = context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                ?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.grid_item, viewGroup, false)
         }
         val image = convertView?.findViewById<ImageView>(R.id.imageView2)

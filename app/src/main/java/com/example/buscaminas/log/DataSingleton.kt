@@ -1,6 +1,6 @@
 package com.example.buscaminas.log
 
-import com.example.buscaminas.database.db.roomexample.GameResult
+import com.example.buscaminas.database.GameResult
 
 object DataSingleton {
     var playerName : String = ""

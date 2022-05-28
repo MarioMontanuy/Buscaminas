@@ -7,11 +7,11 @@
     <TextView
         android:id="@+id/textViewDetailFragment"
         android:layout_width="match_parent"
-        android:layout_height="497dp"
+        android:layout_height="1000dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="160dp"
         android:textColor="@color/teal_200"
-        android:gravity="center_vertical"
-        android:textSize="20sp"
-        android:layout_margin="30dp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -19,14 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
 
-    <Button
+    <!--<Button
         android:id="@+id/buttonBackToList"
         style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="250dp"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/visualizar_lista"
         android:textColor="@color/design_default_color_secondary"
+        android:textSize="40sp"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -34,5 +35,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.913"
-        app:strokeColor="@color/design_default_color_secondary" />
+        app:strokeColor="@color/design_default_color_secondary" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

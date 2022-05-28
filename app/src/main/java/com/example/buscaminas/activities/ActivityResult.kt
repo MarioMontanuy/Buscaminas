@@ -7,9 +7,12 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buscaminas.R
-import com.example.buscaminas.database.db.roomexample.*
 import com.example.buscaminas.log.DataSingleton
 import com.example.buscaminas.databinding.ActivityResultBinding
+import com.example.buscaminas.database.GameResult
+import com.example.buscaminas.database.GameResultApplication
+import com.example.buscaminas.database.GameResultViewModel
+import com.example.buscaminas.database.GameResultViewModelFactory
 
 class ActivityResult : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding

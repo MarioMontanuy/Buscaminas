@@ -2,6 +2,7 @@ package com.example.buscaminas.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buscaminas.databinding.ActivityMainBinding
 
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding.buttonConfiguration.setOnClickListener { startConfig() }
         binding.buttonLeave.setOnClickListener { finish() }
         binding.buttonCheckGames.setOnClickListener { consultGames() }
+        println("*************window" +this.window)
     }
 
     private fun showHelp() {

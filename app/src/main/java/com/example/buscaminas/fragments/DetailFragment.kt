@@ -20,13 +20,13 @@ class DetailFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.detail_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addData()
-        buttonController()
+//        buttonController()
     }
 
     private fun addData(){
@@ -34,12 +34,12 @@ class DetailFragment: Fragment() {
         textView?.text = DataSingleton.currentGame?.getDetailedData()
     }
 
-    private fun buttonController(){
-        val button = requireView().findViewById<Button>(R.id.buttonBackToList)
+    /*private fun buttonController(){
+        val button = requireView().findViewById<Button>(R.id.buttonBackToMainScreen)
         button.setOnClickListener {
             val listFragment = ListFragment()
             val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.fragmentGamesResult, listFragment)?.commit()
         }
-    }
+    }*/
 }
