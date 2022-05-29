@@ -17,4 +17,8 @@ interface GameResultDao {
 
     @Query("DELETE FROM game_result_table")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM game_result_table WHERE id = :id")
+    suspend fun deleteEntry(id: Int)
+
 }

@@ -25,14 +25,14 @@ class ActivityResult : AppCompatActivity() {
         binding.buttonEmail.setOnClickListener { sendEmail() }
         binding.buttonNewGame.setOnClickListener { createNewGame() }
         binding.buttonConfiguration.setOnClickListener { startConfig() }
-        binding.buttonLeave.setOnClickListener { finishGame()  }
+        binding.buttonLeave.setOnClickListener { finishGame() }
         val item = findViewById<Button>(R.id.buttonCheckGames)
-        item.setOnClickListener{ consultGames() }
+        item.setOnClickListener { consultGames() }
         addDataToDatabase()
     }
 
     private fun addStartingData() {
-        binding.textDayData.text = DataSingleton.currentTime
+        binding.textDayData.text = DataSingleton.dateFormat.format(DataSingleton.currentTime)
         binding.textLogData.text = DataSingleton.getResult()
     }
 
@@ -59,18 +59,29 @@ class ActivityResult : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun finishGame(){
+    private fun finishGame() {
         DataSingleton.setDefaultValues()
         finish()
     }
 
-    private fun consultGames(){
+    private fun consultGames() {
         val intent = Intent(this, ConsultGamesActivity::class.java)
         startActivity(intent)
     }
 
-    private fun addDataToDatabase(){
-        val word = GameResult(DataSingleton.playerName, DataSingleton.currentTime, DataSingleton.gridSize, DataSingleton.minePercentage, DataSingleton.mineNumber, DataSingleton.timeLeft, DataSingleton.timeControl, DataSingleton.squaresLeft, DataSingleton.mineSquare, DataSingleton.gameResult)
+    private fun addDataToDatabase() {
+        val word = GameResult(
+            DataSingleton.playerName,
+            DataSingleton.dateFormat.format(DataSingleton.currentTime),
+            DataSingleton.gridSize,
+            DataSingleton.minePercentage,
+            DataSingleton.mineNumber,
+            DataSingleton.timeLeft,
+            DataSingleton.timeControl,
+            DataSingleton.squaresLeft,
+            DataSingleton.mineSquare,
+            DataSingleton.gameResult
+        )
         gameResultViewModel.insert(word)
     }
 

@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.buscaminas.R
@@ -25,9 +24,21 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
-
+const val milliSecondsName = "milliSeconds"
+const val viewModelName = "viewModel"
+const val gameFinishedName = "gameFinished"
+const val resultDataName = "resultData"
+const val preferencesName = "com.example.buscaminas_preferences"
+const val playerNameName = "playerName"
+const val preferenceGridSizeName = "preferenceGridSize"
+const val preferenceBombPercentageName = "preferenceBombPercentage"
+const val timeName = "time"
+const val gameOverSoundName = "gameOverSound"
+const val soundName = "sound"
+const val bombSoundName = "bombSound"
+const val winnerSoundName = "winnerSound"
 class GameFragment : Fragment(), AdapterView.OnItemClickListener,
-    AdapterView.OnItemLongClickListener  {
+    AdapterView.OnItemLongClickListener {
 
     private var currentView: View? = null
     private var resultData = ""
@@ -53,15 +64,18 @@ class GameFragment : Fragment(), AdapterView.OnItemClickListener,
         currentView = inflater.inflate(R.layout.fragment_game, container, false)
         configLayout()
         if (savedInstanceState != null) {
-            milliSeconds = savedInstanceState.getLong("milliSeconds")
-            viewModel = savedInstanceState.getParcelable("viewModel")!!
-            gameFinished = savedInstanceState.getBoolean("gameFinished")
-            resultData += savedInstanceState.getString("resultData")
-            currentView?.findViewById<TextView>(R.id.textViewSquaresLeft)?.text = DataSingleton.squaresLeft.toString()
+            milliSeconds = savedInstanceState.getLong(milliSecondsName)
+            viewModel = savedInstanceState.getParcelable(viewModelName)!!
+            gameFinished = savedInstanceState.getBoolean(gameFinishedName)
+            resultData += savedInstanceState.getString(resultDataName)
+            currentView?.findViewById<TextView>(R.id.textViewSquaresLeft)?.text =
+                DataSingleton.squaresLeft.toString()
         } else {
             createLiveData()
-            DataSingleton.squaresLeft = (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
-            currentView?.findViewById<TextView>(R.id.textViewSquaresLeft)?.text = DataSingleton.squaresLeft.toString()
+            DataSingleton.squaresLeft =
+                (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
+            currentView?.findViewById<TextView>(R.id.textViewSquaresLeft)?.text =
+                DataSingleton.squaresLeft.toString()
         }
         setAdapter()
         createObserver()
@@ -75,25 +89,33 @@ class GameFragment : Fragment(), AdapterView.OnItemClickListener,
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable("viewModel", viewModel)
-        outState.putLong("milliSeconds", milliSeconds)
-        outState.putBoolean("gameFinished", gameFinished)
-        outState.putString("resultData", resultData)
+        outState.putParcelable(viewModelName, viewModel)
+        outState.putLong(milliSecondsName, milliSeconds)
+        outState.putBoolean(gameFinishedName, gameFinished)
+        outState.putString(resultDataName, resultData)
     }
 
     private fun configLayout() {
-        val preferences = context?.getSharedPreferences("com.example.buscaminas_preferences", Context.MODE_PRIVATE)
-        DataSingleton.playerName = preferences?.getString("playerName", "Jugador").toString()
-        DataSingleton.gridSize = preferences?.getString("preferenceGridSize", "5")!!.toInt()
-        DataSingleton.minePercentage = preferences.getString("preferenceBombPercentage", "15")!!.toDouble()
-        DataSingleton.timeControl = preferences.getBoolean("time", false)
-        DataSingleton.mineNumber = (DataSingleton.gridSize * DataSingleton.gridSize * (DataSingleton.minePercentage / 100)).roundToInt()
-        currentView?.findViewById<TextView>(R.id.textviewPlayerName)?.text = DataSingleton.playerName
-        currentView?.findViewById<TextView>(R.id.textViewNumBombs)?.text = DataSingleton.mineNumber.toString()
+        val preferences = context?.getSharedPreferences(
+            preferencesName,
+            Context.MODE_PRIVATE
+        )
+        DataSingleton.playerName = preferences?.getString(playerNameName, "Jugador").toString()
+        DataSingleton.gridSize = preferences?.getString(preferenceGridSizeName, "5")!!.toInt()
+        DataSingleton.minePercentage =
+            preferences.getString(preferenceBombPercentageName, "15")!!.toDouble()
+        DataSingleton.timeControl = preferences.getBoolean(timeName, false)
+        DataSingleton.mineNumber =
+            (DataSingleton.gridSize * DataSingleton.gridSize * (DataSingleton.minePercentage / 100)).roundToInt()
+        currentView?.findViewById<TextView>(R.id.textviewPlayerName)?.text =
+            DataSingleton.playerName
+        currentView?.findViewById<TextView>(R.id.textViewNumBombs)?.text =
+            DataSingleton.mineNumber.toString()
         gridView = currentView?.findViewById(R.id.gridview)
         gridView?.numColumns = DataSingleton.gridSize
         milliSeconds = (DataSingleton.gridSize * 40000).toLong()
-        currentView?.findViewById<Button>(R.id.buttonShowResults)?.setOnClickListener { showResults() }
+        currentView?.findViewById<Button>(R.id.buttonShowResults)
+            ?.setOnClickListener { showResults() }
     }
 
     private fun showResults() {
@@ -134,7 +156,7 @@ class GameFragment : Fragment(), AdapterView.OnItemClickListener,
                 }
 
                 override fun onFinish() {
-                    startSound("gameOverSound")
+                    startSound(gameOverSoundName)
                     DataSingleton.gameResult = "Derrota"
                     showPopUp()
                 }
@@ -147,17 +169,32 @@ class GameFragment : Fragment(), AdapterView.OnItemClickListener,
 
     override fun onItemClick(grid: AdapterView<*>, view: View, position: Int, id: Long) {
         if (!gameFinished) {
+            updateLog(position)
             val result = viewModel.doAction(position, "onItemClick")
             if (result == "Bomb") {
-                startSound("bombSound")
+                startSound(bombSoundName)
                 showPopUp()
-            }else if (result == "Win"){
-                startSound("winnerSound")
+            } else if (result == "Win") {
+                startSound(winnerSoundName)
                 showPopUp()
             }
         }
-        DataSingleton.squaresLeft = (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
-        currentView?.findViewById<TextView>(R.id.textViewSquaresLeft)?.text = DataSingleton.squaresLeft.toString()
+        DataSingleton.squaresLeft =
+            (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
+        currentView?.findViewById<TextView>(R.id.textViewSquaresLeft)?.text =
+            DataSingleton.squaresLeft.toString()
+    }
+
+    private fun updateLog(position: Int) {
+        val currentSquare =
+            Pair(position / DataSingleton.gridSize, position % DataSingleton.gridSize)
+        DataSingleton.currentSquare = "$currentSquare"
+        if (DataSingleton.timeControl) {
+            DataSingleton.currentTimeLeft =
+                currentView?.findViewById<TextView>(R.id.textViewCountDown)?.text.toString()
+        }
+        activity?.findViewById<TextView>(R.id.textViewLogFragmentCurrentClick)?.text =
+            DataSingleton.getLogDataCurrentClick()
     }
 
     private fun showPopUp() {
@@ -184,9 +221,11 @@ class GameFragment : Fragment(), AdapterView.OnItemClickListener,
         Log.i("ActivityGame", resultData)
         bundle.putString("result", resultData)
         intent.putExtras(bundle)*/
-        DataSingleton.squaresLeft = (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
-        DataSingleton.timeLeft = currentView?.findViewById<TextView>(R.id.textViewCountDown)?.text.toString()
-        DataSingleton.currentTime = Date().toString()
+        DataSingleton.squaresLeft =
+            (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
+        DataSingleton.timeLeft =
+            currentView?.findViewById<TextView>(R.id.textViewCountDown)?.text.toString()
+        DataSingleton.currentTime = Date()
         startActivity(intent)
     }
 
@@ -204,7 +243,7 @@ class GameFragment : Fragment(), AdapterView.OnItemClickListener,
 
     private fun startSound(sound: String) {
         val intentService = Intent(context, SoundService::class.java)
-        intentService.putExtra("sound", sound)
+        intentService.putExtra(soundName, sound)
         context?.startService(intentService)
     }
 }

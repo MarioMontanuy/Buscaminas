@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(GameResult::class), version = 1, exportSchema = false)
+@Database(entities = [GameResult::class], version = 1, exportSchema = false)
 abstract class GameResultRoomDatabase : RoomDatabase() {
 
     abstract fun wordDao(): GameResultDao
@@ -22,13 +22,7 @@ abstract class GameResultRoomDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     val wordDao = database.wordDao()
-
-                    // Delete all content here.
                     wordDao.deleteAll()
-
-                    /*// Add sample words.
-                    var word = GameResult("Hello")
-                    wordDao.insert(word)*/
                 }
             }
         }
@@ -42,8 +36,6 @@ abstract class GameResultRoomDatabase : RoomDatabase() {
             context: Context,
             scope: CoroutineScope
         ): GameResultRoomDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -53,7 +45,6 @@ abstract class GameResultRoomDatabase : RoomDatabase() {
                     .addCallback(WordDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }

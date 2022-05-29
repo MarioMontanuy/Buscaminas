@@ -22,24 +22,25 @@ class GameResult
     @ColumnInfo(name = "id")
     private var id: Int = 0
 
-    fun getId() : Int {
+    fun getId(): Int {
         return this.id
     }
 
-    fun setId(id : Int) {
+    fun setId(id: Int) {
         this.id = id
     }
 
-    fun getDetailedData() : String{
-        var result = "Nombre del jugador: $playerName\nFecha: $gameDate\nTamaño de cuadrícula: $gridSize\nPorcentaje de minas: $minePercentage\nNúmero de minas: $mineNumber\nCasillas restantes: $squaresLeft\n"
-        result += if (gameResult == "Victoria"){
+    fun getDetailedData(): String {
+        var result =
+            "Nombre del jugador: $playerName\nFecha: $gameDate\nTamaño de cuadrícula: $gridSize\nPorcentaje de minas: $minePercentage\nNúmero de minas: $mineNumber\nCasillas restantes: $squaresLeft\n"
+        result += if (gameResult == "Victoria") {
             "¡Enhorabuena! Has conseguido evitar todas las bombas\n"
-        }else if (mineSquare != ""){
+        } else if (mineSquare != "") {
             "Bomba activada en la posición $mineSquare\n"
-        }else{
+        } else {
             "¡Te has quedado sin tiempo!\n"
         }
-        if (timeControl){
+        if (timeControl) {
             result += "Tiempo restante: $timeLeft\n"
         }
         result += "Resultado de la partida: $gameResult\n"

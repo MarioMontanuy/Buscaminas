@@ -36,8 +36,9 @@
     <string name="menu_principal">Menú principal</string>
     <string name="visualizar_lista">Visualizar lista</string>
     <string name="consultar_partidas">Consultar Partidas</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="info">Info</string>
     <string name="atr_s">atrás</string>
+    <string name="buscar">Buscar</string>
+    <string name="eliminar">Eliminar</string>
 </resources>

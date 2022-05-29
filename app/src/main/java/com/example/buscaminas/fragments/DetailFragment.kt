@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import com.example.buscaminas.R
 import com.example.buscaminas.log.DataSingleton
 
-class DetailFragment: Fragment() {
+class DetailFragment : Fragment() {
     private var textView: TextView? = null
 
     override fun onCreateView(
@@ -26,20 +24,10 @@ class DetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addData()
-//        buttonController()
     }
 
-    private fun addData(){
+    private fun addData() {
         textView = requireView().findViewById(R.id.textViewDetailFragment)
         textView?.text = DataSingleton.currentGame?.getDetailedData()
     }
-
-    /*private fun buttonController(){
-        val button = requireView().findViewById<Button>(R.id.buttonBackToMainScreen)
-        button.setOnClickListener {
-            val listFragment = ListFragment()
-            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragmentGamesResult, listFragment)?.commit()
-        }
-    }*/
 }

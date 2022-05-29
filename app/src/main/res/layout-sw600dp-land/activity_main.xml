@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232120"
+    tools:context=".activities.MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="1104dp"
+        android:layout_height="472dp"
+        android:background="@drawable/title"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:layout_width="960dp"
+        android:layout_height="474dp"
+        android:background="#00000000"
+        android:gravity="top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.967">
+
+        <Button
+            android:id="@+id/buttonHelp"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="@string/Help"
+            android:textColor="@color/design_default_color_secondary"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:strokeColor="@color/design_default_color_secondary" />
+
+        <Button
+            android:id="@+id/buttonStartGame"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="@string/StartGame"
+            android:textColor="@color/design_default_color_secondary"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:strokeColor="@color/design_default_color_secondary" />
+
+        <Button
+            android:id="@+id/buttonCheckGames"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="@string/consultar_partidas"
+            android:textColor="@color/design_default_color_secondary"
+            android:textSize="30sp"
+            app:cornerRadius="20dp"
+            app:strokeColor="@color/design_default_color_secondary" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonLeave"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/Leave"
+        android:textSize="30sp"
+        android:textColor="@color/design_default_color_secondary"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913"
+        app:strokeColor="@color/design_default_color_secondary" />
+
+    <ImageButton
+        android:id="@+id/buttonConfiguration"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:background="@drawable/config"
+        android:contentDescription="@string/configuration"
+        android:text="@string/configuration"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

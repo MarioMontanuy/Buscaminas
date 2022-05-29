@@ -28,7 +28,6 @@ class GridModel() : ViewModel(), Parcelable {
             game.createGridItemValues(position)
             firstClick = false
         }
-//        val currentItem = game.getCurrentItem(position)
         if (click == "onItemClick") {
             result = onItemClickAction(position)
         } else if (click == "onItemLongClick") {
@@ -38,7 +37,7 @@ class GridModel() : ViewModel(), Parcelable {
         return result
     }
 
-    private fun onItemClickAction(position: Int) : String {
+    private fun onItemClickAction(position: Int): String {
         if (!game.isFlag(position)) {
             game.itemShowed(position)
             game.changeItemView(position)
@@ -46,7 +45,8 @@ class GridModel() : ViewModel(), Parcelable {
                 propagate(position)
             }
             if (game.isBomb(position)) {
-                val square = Pair(position / DataSingleton.gridSize, position % DataSingleton.gridSize)
+                val square =
+                    Pair(position / DataSingleton.gridSize, position % DataSingleton.gridSize)
                 DataSingleton.gameResult = "Derrota"
                 DataSingleton.mineSquare = "$square"
                 return "Bomb"
@@ -58,8 +58,8 @@ class GridModel() : ViewModel(), Parcelable {
         return ""
     }
 
-    fun countShowedSquares() : Int{
-       return game.countShowedSquares()
+    fun countShowedSquares(): Int {
+        return game.countShowedSquares()
     }
 
     private fun propagate(position: Int) {
@@ -87,7 +87,9 @@ class GridModel() : ViewModel(), Parcelable {
     }
 
     private fun isValidPosition(position: Int, newPosition: Int, column: String): Boolean {
-        return ((column != "left" && position % DataSingleton.gridSize == 0) || (column != "right" && position % DataSingleton.gridSize == DataSingleton.gridSize - 1) || column == "center" || position % DataSingleton.gridSize in 1 until DataSingleton.gridSize - 1) && newPosition in 0 until DataSingleton.gridSize * DataSingleton.gridSize && !game.getCurrentItem(newPosition).showed
+        return ((column != "left" && position % DataSingleton.gridSize == 0) || (column != "right" && position % DataSingleton.gridSize == DataSingleton.gridSize - 1) || column == "center" || position % DataSingleton.gridSize in 1 until DataSingleton.gridSize - 1) && newPosition in 0 until DataSingleton.gridSize * DataSingleton.gridSize && !game.getCurrentItem(
+            newPosition
+        ).showed
     }
 
     fun showBombs() {
@@ -96,7 +98,7 @@ class GridModel() : ViewModel(), Parcelable {
     }
 
     private fun onItemLongClickAction(position: Int) {
-        if(!game.isShowed(position)){
+        if (!game.isShowed(position)) {
             if (game.isFlag(position)) {
                 game.setLayerImage(position)
             } else {

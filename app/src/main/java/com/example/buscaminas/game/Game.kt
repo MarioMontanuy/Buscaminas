@@ -5,10 +5,10 @@ import com.example.buscaminas.log.DataSingleton
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Game {
+class Game() {
     private var gridItems = ArrayList<GridItem>()
 
-    constructor(){
+    init {
         this.gridItems = createStartingData()
     }
 
@@ -49,15 +49,15 @@ class Game {
         }
     }
 
-    fun getGrid() : ArrayList<GridItem>{
+    fun getGrid(): ArrayList<GridItem> {
         return this.gridItems
     }
 
-    fun getCurrentItem(position: Int) : GridItem {
+    fun getCurrentItem(position: Int): GridItem {
         return gridItems[position]
     }
 
-    fun isFlag(position: Int) : Boolean{
+    fun isFlag(position: Int): Boolean {
         return gridItems[position].flag
     }
 
@@ -65,18 +65,19 @@ class Game {
         gridItems[position].showed = true
     }
 
-    fun getItemId(position: Int) : Int{
+    fun getItemId(position: Int): Int {
         return gridItems[position].id
     }
-    fun isZero(position: Int) : Boolean {
+
+    fun isZero(position: Int): Boolean {
         return gridItems[position].id == 0
     }
 
-    fun isBomb(position: Int) : Boolean {
+    fun isBomb(position: Int): Boolean {
         return gridItems[position].id == -1
     }
 
-    fun showBombs(){
+    fun showBombs() {
         for (item in gridItems) {
             if (item.id == -1 && !item.showed) {
                 if (item.flag) {
@@ -96,13 +97,14 @@ class Game {
         gridItems[position].imageId = R.drawable.flag
     }
 
-    fun changeFlag(position: Int){
+    fun changeFlag(position: Int) {
         gridItems[position].flag = !gridItems[position].flag
     }
 
-    fun isShowed(position: Int) : Boolean {
+    fun isShowed(position: Int): Boolean {
         return gridItems[position].showed
     }
+
     fun changeItemView(position: Int) {
         when (gridItems[position].id) {
             -1 -> gridItems[position].imageId = R.drawable.mine_red
