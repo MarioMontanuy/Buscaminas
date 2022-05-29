@@ -204,23 +204,11 @@ class GameFragment : Fragment(), AdapterView.OnItemClickListener,
         currentView?.findViewById<Button>(R.id.buttonShowResults)?.visibility = View.VISIBLE
 
         val intent = Intent(context, PopUpFinishGame::class.java)
-        /* val bundle = Bundle()
-         bundle.putString("data", resultData)
-         intent.putExtras(bundle)*/
         startActivity(intent)
     }
 
     private fun gameFinished() {
         val intent = Intent(context, ActivityResult::class.java)
-        /*val bundle = Bundle()
-        resultData += "\nAlias: $playerName\nTamaño de la cuadrícula: $gridSize x $gridSize\nNúmero de minas: $numBombs\nCasillas por descubrir: ${(gridSize * gridSize) - viewModel.countShowedSquares() - numBombs}\n"
-        if (binding.textViewCountDown.visibility != View.GONE) {
-            resultData += "Tiempo restante: ${binding.textViewCountDown.text}\n"
-        }
-
-        Log.i("ActivityGame", resultData)
-        bundle.putString("result", resultData)
-        intent.putExtras(bundle)*/
         DataSingleton.squaresLeft =
             (DataSingleton.gridSize * DataSingleton.gridSize) - viewModel.countShowedSquares() - DataSingleton.mineNumber
         DataSingleton.timeLeft =
