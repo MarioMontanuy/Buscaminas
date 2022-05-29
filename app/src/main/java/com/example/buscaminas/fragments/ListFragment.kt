@@ -1,5 +1,6 @@
 package com.example.buscaminas.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +22,8 @@ class ListFragment : Fragment() {
 
     private var recyclerView: RecyclerView? = null
     var button: Button? = null
+    private var listener: ConsultGamesListener? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,19 +48,18 @@ class ListFragment : Fragment() {
     }
 
     private fun onClickItemSelected(gameResult: GameResult) {
-        DataSingleton.currentGame = gameResult
-        val frag =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentGamesResultDetail)
-        if (frag != null) {
-            val detailFragment = DetailFragment()
-            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-            fragmentTransaction?.replace(R.id.fragmentGamesResultDetail, detailFragment)?.commit()
-        } else {
-            val intent = Intent(context, DetailActivity::class.java)
-            startActivity(intent)
+        if(listener != null){
+            listener!!.onClickItemSelectedConsultGames(gameResult)
         }
+    }
 
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = try {
+            context as ConsultGamesListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$context must implement OnCorreosListener")
+        }
     }
 
     private fun onLongClickItemSelected(itemView: View, gameResult: GameResult): Boolean {
@@ -78,6 +80,14 @@ class ListFragment : Fragment() {
         return true
     }
 
+
+    interface ConsultGamesListener {
+        fun onClickItemSelectedConsultGames(gameResult: GameResult)
+    }
+
+    fun setConsultGamesListener(listener: ConsultGamesListener?) {
+        this.listener = listener
+    }
 
     private val gameResultViewModel: GameResultViewModel by viewModels {
         GameResultViewModelFactory((activity?.applicationContext as GameResultApplication).repository)
